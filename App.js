@@ -20,13 +20,14 @@ process.nextTick = setImmediate
 const app = new Clarifai.App({
   apiKey: 'b5bfcb7aba854f9da7b6d6e418d778cb'
  });
-  function getImageConcepts(image){
+ async function getImageConcepts(image){
    app.models.predict(Clarifai.GENERAL_MODEL, {base64: image}).then(
      function(response) {
-       console.log('response' ,response);
+      console.log('response' ,response.outputs[0].data.concepts);
+      console.log('image' ,image);
      },
      function(err) {
-       console.error(err);
+    
      }
    );
  }
@@ -45,7 +46,7 @@ export default class App extends Component {
   constructor(){
     super()
   this.state = {
-    
+    images:[]
   }
 }
 lunchCamera(){
@@ -63,7 +64,8 @@ lunchCamera(){
     else{
       console.log('response' , response)
       this.setState({pic:'data:image/png;base64,' + response.data})
-      getImageConcepts(response.data)
+     getImageConcepts(response.data)
+     
     }
   });
  }
