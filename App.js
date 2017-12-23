@@ -14,6 +14,23 @@ import {
   Button
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker'
+import Clarifai from 'clarifai';
+
+process.nextTick = setImmediate
+const app = new Clarifai.App({
+  apiKey: 'b5bfcb7aba854f9da7b6d6e418d778cb'
+ });
+  function getImageConcepts(image){
+   app.models.predict(Clarifai.GENERAL_MODEL, {base64: image}).then(
+     function(response) {
+       console.log('response' ,response);
+     },
+     function(err) {
+       console.error(err);
+     }
+   );
+ }
+
 var options = {
   title: 'Select Avatar',
   customButtons: [
@@ -46,6 +63,7 @@ lunchCamera(){
     else{
       console.log('response' , response)
       this.setState({pic:'data:image/png;base64,' + response.data})
+      getImageConcepts(response.data)
     }
   });
  }
