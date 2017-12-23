@@ -9,29 +9,70 @@ import {
   Platform,
   StyleSheet,
   Text,
-  View
+  View,
+  Image,
+  Button
 } from 'react-native';
-
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' +
-    'Cmd+D or shake for dev menu',
-  android: 'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
-export default class App extends Component<{}> {
+import ImagePicker from 'react-native-image-picker'
+var options = {
+  title: 'Select Avatar',
+  customButtons: [
+    {name: 'fb', title: 'Choose Photo from Facebook'},
+  ],
+  storageOptions: {
+    skipBackup: true,
+    path: 'images'
+  }
+};
+export default class App extends Component {
+  constructor(){
+    super()
+  this.state = {
+    
+  }
+}
+lunchCamera(){
+  console.log('sabbba')
+  ImagePicker.launchCamera(options, (response)  => {
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    }
+    else if (response.error) {
+      console.log('ImagePicker Error: ', response.error);
+    }
+    else if (response.customButton) {
+      console.log('User tapped custom button: ', response.customButton);
+    }
+    else{
+      console.log('response' , response)
+      this.setState({pic:'data:image/png;base64,' + response.data})
+    }
+  });
+ }
+ launchCameraRoll(){
+  console.log('sabbba bataba')
+  ImagePicker.launchImageLibrary(options, (response)  => {
+    if (response.didCancel) {
+      console.log('User cancelled image picker');
+    }
+    else if (response.error) {
+      console.log('ImagePicker Error: ', response.error);
+    }
+    else if (response.customButton) {
+      console.log('User tapped custom button: ', response.customButton);
+    }
+    else{
+      console.log('response' , response)
+      this.setState({pic:'data:image/png;base64,' + response.data})
+    }
+  });
+ }
   render() {
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit App.js
-        </Text>
-        <Text style={styles.instructions}>
-          {instructions}
-        </Text>
+          <Image style={styles.picture} source={{uri:this.state.pic}} ></Image>
+        <Button title={'camera'} onPress={()=> this.lunchCamera()}></Button>
+        <Button title={'cameraroll'} onPress={()=> this.launchCameraRoll()}></Button>
       </View>
     );
   }
@@ -44,14 +85,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
-  welcome: {
-    fontSize: 20,
-    textAlign: 'center',
-    margin: 10,
-  },
-  instructions: {
-    textAlign: 'center',
-    color: '#333333',
-    marginBottom: 5,
-  },
+    picture:{
+      width:200,
+      height:200
+    }
 });
