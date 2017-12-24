@@ -53,7 +53,11 @@ componentWillMount()
 }
 
 onPress(){
- var newImae = getImage().then((value)=>{ console.log('newImage' , value)})
+ getImage().then((newImage)=>{ 
+  var images = _.cloneDeep(this.state.images)
+  images.push(newImage)
+  this.setState({images:images})
+  })
  }
 
   render() {
