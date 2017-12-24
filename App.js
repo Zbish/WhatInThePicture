@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import _ from 'lodash';
 import {getImage} from './src/utils'
+import Navigator from './src/screens/navigator'
 
 process.nextTick = setImmediate
 
@@ -61,12 +62,8 @@ onPress(){
  }
 
   render() {
-    console.log('state' , this.state)
     return (
-      <View style={styles.container}>
-          <Image style={styles.picture} source={{uri:this.state.pic}} ></Image>
-        <Button title={'Add Photo'} onPress={()=> this.onPress()}></Button>
-      </View>
+     <Navigator />
     );
   }
 }
