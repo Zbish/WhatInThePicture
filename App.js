@@ -16,6 +16,7 @@ import {
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker'
 import Clarifai from 'clarifai';
+import _ from 'lodash';
 import {chooseAnImage} from './src/utils'
 
 process.nextTick = setImmediate
@@ -84,35 +85,52 @@ export default class App extends Component {
 }
 componentWillMount()
 {
-  getData()
+  // getData()
 }
-
-lunchCamera(){
-  var images = [...this.state.images]
-  ImagePicker.showImagePicker(options, (response)  => {
-    var item2 = {uri:response.uri,consepts:'myconsepts'}
-    var cons = getfromimage(response.data).then( function(value){
-      item2 = {...item2,consept:value}
-      try {
-        saveData(item2,images)
-      }catch (error){
-        console.log('constffffffffffffffffffffig' , error)
-      }
-    
-    })
-    images.push(item2)
-    this.setState({images:images,pic:response.uri})
+getImageConcepts2(image){
   
-
-   });
+  return  new Promise(function(resolve, reject) {
+      app.models.predict(Clarifai.GENERAL_MODEL, {base64: image}).then(
+          function(response) {
+           resolve(response.outputs[0].data.concepts)
+          },
+          function(err) {
+         
+          }
+        );
+    });
+  }
+onPress(){
+  // var images = [...this.state.images]
+  ImagePicker.showImagePicker(options, (response)  => {
+    console.log('stateeeee' ,response)
+    // var item2 = {uri:response.uri}
+    var cons =  this.getImageConcepts2(response.data).then((value) => {
+         console.log('stateewwww' ,this.state)
+         console.log('stateewwww' ,value)
+         console.log('stateewwww' ,response.data)
+    } )
+    // .then( function(value){
+      // item2 = {...item2,consept:value}
+      // console.log('stateewwww' ,this.state)
+      // try {
+      //   saveData(item2,images)
+      // }catch (error){
+      //   console.log('constffffffffffffffffffffig' , error)
+      // }
+    // })
+    // console.log('gggg' ,cons)
+    // images.push(item2)
+    // this.setState({images:images,pic:response.uri})
+   })
  }
 
   render() {
-    console.log('state' , this.state.images)
+    console.log('state' , this.state)
     return (
       <View style={styles.container}>
           <Image style={styles.picture} source={{uri:this.state.pic}} ></Image>
-        <Button title={'Add Photo'} onPress={()=> this.lunchCamera()}></Button>
+        <Button title={'Add Photo'} onPress={()=> this.onPress()}></Button>
       </View>
     );
   }
