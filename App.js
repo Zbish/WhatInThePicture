@@ -11,37 +11,19 @@ import {
   Text,
   View,
   Image,
-  Button
+  Button,
+  AsyncStorage
 } from 'react-native';
 import ImagePicker from 'react-native-image-picker'
 import Clarifai from 'clarifai';
+import {chooseAnImage,getImageConcepts2} from './src/utils'
 
 process.nextTick = setImmediate
 const app = new Clarifai.App({
   apiKey: 'b5bfcb7aba854f9da7b6d6e418d778cb'
  });
- async function getImageConcepts(image){
-   app.models.predict(Clarifai.GENERAL_MODEL, {base64: image}).then(
-     function(response) {
-      console.log('response' ,response.outputs[0].data.concepts);
-      console.log('image' ,image);
-     },
-     function(err) {
-    
-     }
-   );
- }
 
-var options = {
-  title: 'Select Avatar',
-  customButtons: [
-    {name: 'fb', title: 'Choose Photo from Facebook'},
-  ],
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
-  }
-};
+
 export default class App extends Component {
   constructor(){
     super()
@@ -49,50 +31,17 @@ export default class App extends Component {
     images:[]
   }
 }
-lunchCamera(){
-  console.log('sabbba')
-  ImagePicker.launchCamera(options, (response)  => {
-    if (response.didCancel) {
-      console.log('User cancelled image picker');
-    }
-    else if (response.error) {
-      console.log('ImagePicker Error: ', response.error);
-    }
-    else if (response.customButton) {
-      console.log('User tapped custom button: ', response.customButton);
-    }
-    else{
-      console.log('response' , response)
-      this.setState({pic:'data:image/png;base64,' + response.data})
-     getImageConcepts(response.data)
-     
-    }
-  });
- }
- launchCameraRoll(){
-  console.log('sabbba bataba')
-  ImagePicker.launchImageLibrary(options, (response)  => {
-    if (response.didCancel) {
-      console.log('User cancelled image picker');
-    }
-    else if (response.error) {
-      console.log('ImagePicker Error: ', response.error);
-    }
-    else if (response.customButton) {
-      console.log('User tapped custom button: ', response.customButton);
-    }
-    else{
-      console.log('response' , response)
-      this.setState({pic:'data:image/png;base64,' + response.data})
-    }
-  });
+async lunchCamera(){
+  const imagebase64 = await chooseAnImage(ImagePicker)
+  const concepts = await getImageConcepts2(Clarifai,imagebase64,app)
+  var item = {image:imagebase64,concepts:concepts,date:new Date()}
+  console.log('item' ,item)
  }
   render() {
     return (
       <View style={styles.container}>
           <Image style={styles.picture} source={{uri:this.state.pic}} ></Image>
-        <Button title={'camera'} onPress={()=> this.lunchCamera()}></Button>
-        <Button title={'cameraroll'} onPress={()=> this.launchCameraRoll()}></Button>
+        <Button title={'Add Photo'} onPress={()=> this.lunchCamera()}></Button>
       </View>
     );
   }
@@ -106,7 +55,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F5FCFF',
   },
     picture:{
-      width:200,
-      height:200
+      width:300,
+      height:300
     }
 });
