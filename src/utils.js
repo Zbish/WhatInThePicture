@@ -24,7 +24,8 @@ const options = {
             ImagePicker.showImagePicker(options, (response)  => {
                 var cons = getImageConcepts2(response.data).then((value) => {
                      var concepts = value.outputs[0].data.concepts
-                     var item = {image:response.uri,consepts:concepts}
+                     var time = new Date
+                     var item = {image:response.uri,consepts:concepts,taken:time}
             resolve(item)})
       } )
      })
