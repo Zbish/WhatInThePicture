@@ -10,10 +10,16 @@ export const options = {
       path: 'images'
     }
   };
-export const chooseAnImage = function(ImagePicker){
+export const chooseAnImage =  function(ImagePicker,clarifai,app){
     return  new Promise(function(resolve, reject) {
+        
     ImagePicker.showImagePicker(options, (response)  => {
-        resolve(response.data);
+        
+        const concepts = getImageConcepts2(Clarifai,response.data,app)
+        var item = {imagePath:response.uri,consepts:concepts}
+
+        resolve(item);
+
        });
   });
    
