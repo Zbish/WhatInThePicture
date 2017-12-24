@@ -45,23 +45,7 @@ const app = new Clarifai.App({
     console.log('get eroor' ,error)
   }
  }
- function getImageConcepts2(image){
-  
-  return  new Promise(function(resolve, reject) {
-      app.models.predict(Clarifai.GENERAL_MODEL, {base64: image}).then(
-          function(response) {
-           resolve(response.outputs[0].data.concepts)
-          },
-          function(err) {
-         
-          }
-        );
-    });
-  }
-  async function getfromimage(image){
-    var concepts = await getImageConcepts2(image) 
-    return concepts
-  }
+
   function saveData(data,images){
     
     var array = images
@@ -88,40 +72,18 @@ componentWillMount()
   // getData()
 }
 getImageConcepts2(image){
-  
-  return  new Promise(function(resolve, reject) {
-      app.models.predict(Clarifai.GENERAL_MODEL, {base64: image}).then(
-          function(response) {
-           resolve(response.outputs[0].data.concepts)
-          },
-          function(err) {
-         
-          }
-        );
-    });
+  var concept = app.models.predict(Clarifai.GENERAL_MODEL, {base64: image})
+  return  concept
   }
 onPress(){
-  // var images = [...this.state.images]
   ImagePicker.showImagePicker(options, (response)  => {
-    console.log('stateeeee' ,response)
-    // var item2 = {uri:response.uri}
-    var cons =  this.getImageConcepts2(response.data).then((value) => {
-         console.log('stateewwww' ,this.state)
-         console.log('stateewwww' ,value)
-         console.log('stateewwww' ,response.data)
+    var cons = this.getImageConcepts2(response.data).then((value) => {
+         var images =  _.cloneDeep(this.state.images)
+         var concepts = value.outputs[0].data.concepts
+         var item = {image:response.uri,consepts:concepts}
+         images.push(item)
+         this.setState({images:images})
     } )
-    // .then( function(value){
-      // item2 = {...item2,consept:value}
-      // console.log('stateewwww' ,this.state)
-      // try {
-      //   saveData(item2,images)
-      // }catch (error){
-      //   console.log('constffffffffffffffffffffig' , error)
-      // }
-    // })
-    // console.log('gggg' ,cons)
-    // images.push(item2)
-    // this.setState({images:images,pic:response.uri})
    })
  }
 
