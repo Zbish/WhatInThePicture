@@ -14,52 +14,32 @@ import {
   Button,
   AsyncStorage
 } from 'react-native';
-import ImagePicker from 'react-native-image-picker'
-import Clarifai from 'clarifai';
 import _ from 'lodash';
-import {chooseAnImage} from './src/utils'
+import {getImage} from './src/utils'
 
 process.nextTick = setImmediate
-const app = new Clarifai.App({
-  apiKey: 'b5bfcb7aba854f9da7b6d6e418d778cb'
- });
- const options = {
-  title: 'Select',
-  customButtons: [
-  //   {name: 'fb', title: 'Choose Photo from Facebook'},
-  ],
-  storageOptions: {
-    skipBackup: true,
-    path: 'images'
-  }
-};
- async function getData(){
- 
-  try {
-    var data = await  AsyncStorage.getItem('@MySuperStore:key')
-    if (data !== null){
-      // We have data!!
-      console.log('we have data2' ,JSON.parse(data))
-    }
-  } catch (error) {
-    console.log('get eroor' ,error)
-  }
- }
 
-  function saveData(data,images){
-    
-    var array = images
-    console.log('array', array)
-    array.push(data)
-    
-    try {
-      
-      AsyncStorage.setItem('@MySuperStore:key',JSON.stringify(array));
-      console.log('data savw')
-    } catch (error) {
-      console.log('get eroor' ,error)
-    }
-   }
+//  async function getData(){
+
+//   try {
+//     var data = await  AsyncStorage.getItem('@MySuperStore:key')
+//     if (data !== null){
+//       // We have data!!
+//       console.log('we have data2' ,JSON.parse(data))
+//     }
+//   } catch (error) {
+//     console.log('get eroor' ,error)
+//   }
+//  }
+
+//   function saveData(data){
+//     try {
+//       AsyncStorage.setItem('@MySuperStore:key',JSON.stringify(data));
+//       console.log('data save')
+//     } catch (error) {
+//       console.log('get eroor' ,error)
+//     }
+//    }
 export default class App extends Component {
   constructor(){
     super()
@@ -71,20 +51,9 @@ componentWillMount()
 {
   // getData()
 }
-getImageConcepts2(image){
-  var concept = app.models.predict(Clarifai.GENERAL_MODEL, {base64: image})
-  return  concept
-  }
+
 onPress(){
-  ImagePicker.showImagePicker(options, (response)  => {
-    var cons = this.getImageConcepts2(response.data).then((value) => {
-         var images =  _.cloneDeep(this.state.images)
-         var concepts = value.outputs[0].data.concepts
-         var item = {image:response.uri,consepts:concepts}
-         images.push(item)
-         this.setState({images:images})
-    } )
-   })
+ var newImae = getImage().then((value)=>{ console.log('newImage' , value)})
  }
 
   render() {
