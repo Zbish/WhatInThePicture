@@ -17,10 +17,12 @@ import {
 export default class HomeScreen extends Component {
 
 onPress(){
-    this.props.navigation.navigate("ImageScreen");
+    // this.props.navigation.navigate("ImageScreen");
+    this.props.screenProps.addImage()
  }
 
   render() {
+      console.log('screenprops' , this.props)
     return (
       <View style={styles.container}>
         <Button title={'Add Photo 2'} onPress={()=> this.onPress()}></Button>

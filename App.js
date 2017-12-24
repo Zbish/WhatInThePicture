@@ -53,7 +53,7 @@ componentWillMount()
   // getData()
 }
 
-onPress(){
+addImage(){
  getImage().then((newImage)=>{ 
   var images = _.cloneDeep(this.state.images)
   images.push(newImage)
@@ -63,7 +63,10 @@ onPress(){
 
   render() {
     return (
-     <Navigator />
+     <Navigator screenProps={{
+                images:this.state.images,
+                addImage:()=>this.addImage()
+     }}/>
     );
   }
 }
