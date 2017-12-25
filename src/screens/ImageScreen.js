@@ -22,7 +22,6 @@ onPress(){
  }
 
   render() {
-      console.log('imaescreen' , this.props.navigation.state.params.item)
       var item = this.props.navigation.state.params.item
       var time = item.taken
       var concepts = item.consepts
