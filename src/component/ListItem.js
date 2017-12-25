@@ -7,6 +7,7 @@ import {
   View,
   Image,
   Button,
+  TouchableHighlight
 } from 'react-native';
 import moment from 'moment';
 
@@ -20,10 +21,11 @@ onPress(){
       var item = this.props.item
       var time = item.taken
       var concepts = item.consepts
-      console.log('item',concepts)
+      console.log('item',this.props)
     return (
-      <View style={styles.container}>
-          <View>
+        <TouchableHighlight style={styles.wrapper} underlayColor='grey' onPress={() => this.props.onPress(item)}>
+            <View style={styles.container}>
+            <View>
           <Text>{moment(time).format('dddd ,LL')}</Text>
           <Image style={styles.image} source={{uri:item.image}}></Image>
           </View>
@@ -34,18 +36,21 @@ onPress(){
           })
         }
        </View>
-      </View>
+            </View>
+      </TouchableHighlight>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
+  wrapper: {
     flex: 1,
-    flexDirection:'row',
     alignItems: 'center',
     height:200,
     backgroundColor: '#F5FCFF',
+  },
+  container:{
+    flexDirection:'row',
   },
   image:{
     width:150,
