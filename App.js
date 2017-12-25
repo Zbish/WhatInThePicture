@@ -46,6 +46,7 @@ export default class App extends Component {
     super()
   this.state = {
     images:[],
+    searchResult:[]
   } 
 }
 componentWillMount()
@@ -60,11 +61,16 @@ addImage(){
   this.setState({images:images})
   })
  }
+addSearch(array){
+this.setState({searchResult:array})
+}
 
   render() {
     return (
      <Navigator screenProps={{
                 images:this.state.images,
+                searchResult:this.state.searchResult,
+                addSearch:(array)=>this.addSearch(array),
                 addImage:()=>this.addImage()
      }}/>
     );

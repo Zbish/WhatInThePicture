@@ -30,3 +30,17 @@ const options = {
       } )
      })
    }
+
+   export const incrementalSearch = function(array,value){
+    var clone =  _.cloneDeep(array);
+    var str = value;
+    var res = str.split(" ");
+    var newArray = clone
+    var item = []
+      for(var i = 0 ; i < res.length-1 ; i++ )
+        {
+          var item = _.filter(newArray, { consepts: [{ name: res[i] }] });
+          var newArray = item
+        }
+    return item
+   }

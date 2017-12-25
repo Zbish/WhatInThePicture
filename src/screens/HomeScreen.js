@@ -16,13 +16,14 @@ import {
   TextInput
 } from 'react-native';
 import ListItem from '../component/ListItem'
-
+import {incrementalSearch}from '../utils'
 
 export default class HomeScreen extends Component {
 
 componentWillMount() {
     this.setState({
       currentValue: '',
+    //   images:this.props.screenProps.images
     });
   }
 onPress(){
@@ -34,9 +35,19 @@ this.props.navigation.navigate("ImageScreen",{item:item});
 onChange(val)
 {
     this.setState({currentValue:val})
+   var searchElement = incrementalSearch(this.props.screenProps.images,val)
+   this.props.screenProps.addSearch(searchElement)
 }
   render() {
-      console.log('screenprops' , this.state.currentValue)
+      var show
+      var images = this.props.screenProps.images
+      var search = this.props.screenProps.searchResult
+        if(this.state.currentValue){
+            show = search
+        }
+        else{
+            show = images
+        }
     return (
       <View style={styles.container}>
           <TextInput underLineColorAndroid='transparent'
@@ -47,7 +58,7 @@ onChange(val)
               value={this.state.currentValue}
             />
             <FlatList
-                          data={this.props.screenProps.images}
+                          data={show}
                           renderItem={({ item }) => <ListItem item={item} 
                                                               onPress={(item)=>this.navigateTo(item)}/>}
                           keyExtractor={(item, index) => index}
