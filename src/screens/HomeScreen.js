@@ -1,8 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
 
 import React, { Component } from 'react';
 import {
@@ -16,9 +11,9 @@ import {
   TextInput
 } from 'react-native';
 import ListItem from '../component/ListItem'
-import {incrementalSearch}from '../utils'
+import {incrementalSearch, getImage}from '../utils'
 import { connect } from 'react-redux'
-import { addPerson, deletePerson} from '../redux/actions'
+import { addPerson, deletePerson,AddImage} from '../redux/actions'
 
 class HomeScreen extends Component {
 
@@ -29,7 +24,11 @@ componentWillMount() {
     });
   }
 onPress(){
-    this.props.screenProps.addImage()
+  var images
+  getImage().then((newImage)=>{ 
+    this.props.AddImage(newImage)
+    })
+    
  }
 navigateTo(item){
 this.props.navigation.navigate("ImageScreen",{item:item});
@@ -41,9 +40,9 @@ onChange(val)
    this.props.screenProps.addSearch(searchElement)
 }
   render() {
-    console.log("home" , this.props)
+    console.log("home" , this.props.images)
       var show
-      var images = this.props.screenProps.images
+      var images = this.props.images
       var search = this.props.screenProps.searchResult
         if(this.state.currentValue){
             show = search
@@ -94,14 +93,15 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state) {
   return {
-    people: state.people.people
+    images: state.images.images
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
     dispatchAddPerson: (person) => dispatch(addPerson(person)),
-    dispatchdeletePerson: (person) => dispatch(deletePerson(person))
+    dispatchdeletePerson: (person) => dispatch(deletePerson(person)),
+    AddImage: (image) => dispatch(AddImage(image))
   }
 }
 

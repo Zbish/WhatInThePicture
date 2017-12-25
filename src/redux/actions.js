@@ -1,4 +1,4 @@
-import { ADD_PERSON, DELETE_PERSON } from './constant';
+import { ADD_PERSON, DELETE_PERSON,ADD_IMAGE, } from './constant';
 
 export function addPerson(person) {
   return {
@@ -13,3 +13,10 @@ export function deletePerson(person) {
     person,
   };
 }
+
+export function AddImage(image){
+    return {
+        type: ADD_IMAGE,
+        image
+      };
+    }

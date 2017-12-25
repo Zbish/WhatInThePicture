@@ -20,15 +20,19 @@ const options = {
     return  concept
     }
   export const getImage = function(){
-           return new Promise( (resolve, reject) => {
+    var guid = uuidv4()
+             return new Promise( (resolve, reject) => {
             ImagePicker.showImagePicker(options, (response)  => {
                 var cons = getImageConcepts2(response.data).then((value) => {
                      var concepts = value.outputs[0].data.concepts
                      var time = new Date
-                     var item = {image:response.uri,consepts:concepts,taken:time}
+                     var item = {id:guid,image:response.uri,consepts:concepts,taken:time}
             resolve(item)})
       } )
      })
+   }
+   export const getImageRedux = function(){
+     console.log('gogogo')
    }
 
    export const incrementalSearch = function(array,value){
@@ -44,3 +48,9 @@ const options = {
         }
     return item
    }
+   const uuidv4 = function() {
+    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
+      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
+    )
+  }
+  

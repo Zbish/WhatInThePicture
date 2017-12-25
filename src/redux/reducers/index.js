@@ -1,9 +1,9 @@
 // reducers/index.js
 import { combineReducers } from 'redux'
-import people from './people'
+import images from './images'
 
 const rootReducer = combineReducers({
-    people
+    images
 })
 
 export default rootReducer
