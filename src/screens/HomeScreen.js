@@ -17,8 +17,10 @@ import {
 } from 'react-native';
 import ListItem from '../component/ListItem'
 import {incrementalSearch}from '../utils'
+import { connect } from 'react-redux'
+import { addPerson, deletePerson} from '../redux/actions'
 
-export default class HomeScreen extends Component {
+class HomeScreen extends Component {
 
 componentWillMount() {
     this.setState({
@@ -39,6 +41,7 @@ onChange(val)
    this.props.screenProps.addSearch(searchElement)
 }
   render() {
+    console.log("home" , this.props)
       var show
       var images = this.props.screenProps.images
       var search = this.props.screenProps.searchResult
@@ -88,3 +91,21 @@ const styles = StyleSheet.create({
     borderWidth: 0.6,
   },
 });
+
+function mapStateToProps (state) {
+  return {
+    people: state.people.people
+  }
+}
+
+function mapDispatchToProps (dispatch) {
+  return {
+    dispatchAddPerson: (person) => dispatch(addPerson(person)),
+    dispatchdeletePerson: (person) => dispatch(deletePerson(person))
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(HomeScreen)

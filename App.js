@@ -17,8 +17,12 @@ import {
 import _ from 'lodash';
 import {getImage} from './src/utils'
 import Navigator from './src/screens/navigator'
+import {connect, Provider} from 'react-redux';
+import { addNavigationHelpers } from "react-navigation";
+import configureStore from './src/redux/configureStore'
 
 process.nextTick = setImmediate
+const store = configureStore()
 
 //  async function getData(){
 
@@ -41,7 +45,14 @@ process.nextTick = setImmediate
 //       console.log('get eroor' ,error)
 //     }
 //    }
-export default class App extends Component {
+const AppWithNavigationState = connect(state => {
+  return {
+    nav: state.nav,
+  }
+})(({dispatch, nav}) => (
+  <Navigator navigation={addNavigationHelpers({ dispatch, state: nav })}/>
+));
+ class App extends Component {
   constructor(){
     super()
   this.state = {
@@ -66,13 +77,16 @@ this.setState({searchResult:array})
 }
 
   render() {
+    console.log('store ' , store)
     return (
-     <Navigator screenProps={{
+      <Provider store={store}>
+       <Navigator screenProps={{
                 images:this.state.images,
                 searchResult:this.state.searchResult,
                 addSearch:(array)=>this.addSearch(array),
                 addImage:()=>this.addImage()
      }}/>
+  </Provider>
     );
   }
 }
@@ -89,3 +103,5 @@ const styles = StyleSheet.create({
       height:300
     }
 });
+
+export default App;
