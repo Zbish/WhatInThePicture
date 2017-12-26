@@ -1,19 +1,11 @@
 // reducers/images.js
 import {ADD_IMAGE,SEARCH } from '../constant';
 import {incrementalSearch, getData,saveData}from '../../utils'
-var pictures =[]
-// var to = getData().then((value) => {
-//   console.log('getData' , value)
-
-//   return(value)
-// })
-// console.log('to' , to)
 const images = []
 const currentValue = ''
 const searchResult = []
 
 export default (state, action) => {
-  console.log('state' , state)
   switch (action.type) {
     case ADD_IMAGE:
     return{
@@ -34,7 +26,6 @@ export default (state, action) => {
         images: images,
         currentValue:currentValue,
         searchResult:searchResult,
-        pictures:pictures
       };
   }
 }

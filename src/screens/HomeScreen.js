@@ -15,10 +15,8 @@ import { AddImage, Search } from '../redux/actions'
 class HomeScreen extends Component {
 
   onPress() {
-    console.log('state' ,this.props.images)
     getImage().then((newImage) => {
       this.props.AddImage(newImage)
-      console.log('state2' ,this.props.images)
       saveData(this.props.images)
     })
   }
@@ -29,7 +27,6 @@ class HomeScreen extends Component {
     this.props.Search(val)
   }
   render() {
-    console.log('mystate' , this.props)
     const images = this.props.images
     const search = this.props.searchResult
     const value = this.props.currentValue
@@ -81,7 +78,6 @@ function mapStateToProps(state) {
     images: state.images.images,
     currentValue: state.images.currentValue,
     searchResult: state.images.searchResult,
-    pictures: state.images.pictures
   }
 }
 
