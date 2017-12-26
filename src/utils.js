@@ -40,22 +40,24 @@ const options = {
    export const incrementalSearch = function(array,value){
     var clone =  _.cloneDeep(array);
     var newArray = []
-    // var str = value;
-    // var res = str.split(" ")
-
-    for(var i = 0 ; i < clone.length ; i++){
-      
-      var newList = clone[i].consepts.filter((v) => {
-        return v.indexOf(value) !== -1;
-        })
-        
-        if(newList.length > 0){
-            console.log('list' ,newList)
-            newArray.push(clone[i])
+    var str = value;
+    var res = str.split(" ")
+    for(var j = 0 ; j < res.length ; j++)
+      {
+        for(var i = 0 ; i < clone.length ; i++){
+          
+          var newList = clone[i].consepts.filter((v) => {
+            return v.indexOf(res[j]) !== -1;
+            })
+            
+            if(newList.length > 0){
+                newArray.push(clone[i])
+              }
           }
+          clone = newArray
+          newArray = []
       }
-      console.log('newArray' , newArray)
-    return newArray
+    return clone
    }
   const uuidv4 = function() {
     function s4() {
