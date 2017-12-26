@@ -22,10 +22,10 @@ export default (state, action) => {
     };
     break;
     case DELETE_IMAGE:
-    deleteImage(state.images,action.id)
+    var newState = deleteImage(state.images,action.id)
     return{
       ...state,
-   
+      images:newState
     };
     break;
     default:

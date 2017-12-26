@@ -78,7 +78,7 @@ const options = {
   
    export const deleteImage = function(array,id){
     var clone =  _.cloneDeep(array);
-
-    console.log('sabababutils' ,clone)
-
+    var index = _.findIndex(clone, function(o) { return o.id == id; });
+    clone.splice(index, 1);
+    return clone
    }
