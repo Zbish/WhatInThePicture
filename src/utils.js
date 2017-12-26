@@ -54,4 +54,26 @@ const options = {
       (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
     )
   }
+
+  //  async function getData(){
+
+//   try {
+//     var data = await  AsyncStorage.getItem('@MySuperStore:key')
+//     if (data !== null){
+//       // We have data!!
+//       console.log('we have data2' ,JSON.parse(data))
+//     }
+//   } catch (error) {
+//     console.log('get eroor' ,error)
+//   }
+//  }
+
+//   function saveData(data){
+//     try {
+//       AsyncStorage.setItem('@MySuperStore:key',JSON.stringify(data));
+//       console.log('data save')
+//     } catch (error) {
+//       console.log('get eroor' ,error)
+//     }
+//    }
   
