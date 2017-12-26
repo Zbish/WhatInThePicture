@@ -18,17 +18,17 @@ const AppWithNavigationState = connect(state => {
 
 class App extends Component {
   componentWillMount(){
-    var to = getData().then((value) => {
-      console.log('getData2' , value)
-    
-      return(value)
-    })
-    console.log('to' , to)
+  //  getData().then((value) => {
+  //     console.log('getData2' , value)
     // persistStore(store, { storage: AsyncStorage }, () => {
     //   this.setState({ rehydrated: true })
     // })
+  
+    // })
+    
   }
   render() {
+    // if (!this.state.rehydrate) return <Text>Loading...</Text>
     return (
       <Provider store={store}>
         <AppWithNavigationState />
