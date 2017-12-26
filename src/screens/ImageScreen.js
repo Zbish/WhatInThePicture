@@ -22,7 +22,7 @@ export default class ImageScreen extends Component {
        <View style={styles.concepts}>
        {
           concepts.map((item, index) => {
-                            return <Text key={index}>{item.name} </Text>
+                            return <Text key={index}>{item} </Text>
           })
         }
        </View>
