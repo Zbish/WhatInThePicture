@@ -1,10 +1,9 @@
 // reducers/images.js
-import {ADD_IMAGE,SEARCH } from '../constant';
-import {incrementalSearch, getData,saveData}from '../../utils'
+import {ADD_IMAGE,SEARCH,DELETE_IMAGE } from '../constant';
+import {incrementalSearch, getData,saveData,deleteImage}from '../../utils'
 const images = []
 const currentValue = ''
 const searchResult = []
-const loading = true
 
 export default (state, action) => {
   switch (action.type) {
@@ -22,12 +21,18 @@ export default (state, action) => {
       searchResult:searchElement
     };
     break;
+    case DELETE_IMAGE:
+    deleteImage(state.images,action.id)
+    return{
+      ...state,
+   
+    };
+    break;
     default:
     return state || {
         images: images,
         currentValue:currentValue,
         searchResult:searchResult,
-        loading:loading
       };
   }
 }

@@ -10,14 +10,13 @@ import {
 import ListItem from '../component/ListItem'
 import { getImage,saveData } from '../utils'
 import { connect } from 'react-redux'
-import { AddImage, Search } from '../redux/actions'
+import { AddImage, Search,deleteImage } from '../redux/actions'
 
 class HomeScreen extends Component {
 
   onPress() {
     getImage().then((newImage) => {
       this.props.AddImage(newImage)
-      saveData(this.props.images)
     })
   }
   navigateTo(item) {
@@ -27,7 +26,6 @@ class HomeScreen extends Component {
     this.props.Search(val)
   }
   render() {
-    console.log('state' , this.props)
     const images = this.props.images
     const search = this.props.searchResult
     const value = this.props.currentValue
@@ -45,6 +43,7 @@ class HomeScreen extends Component {
           data={show}
           renderItem={({ item }) =>
             <ListItem item={item}
+              deleteImage={(id)=>this.props.deleteImage(id)}
               onPress={(item) => this.navigateTo(item)} />}
           keyExtractor={(item, index) => index}
         />
@@ -79,14 +78,14 @@ function mapStateToProps(state) {
     images: state.images.images,
     currentValue: state.images.currentValue,
     searchResult: state.images.searchResult,
-    loading:state.images.loading
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     AddImage: (image) => dispatch(AddImage(image)),
-    Search: (val) => dispatch(Search(val))
+    Search: (val) => dispatch(Search(val)),
+    deleteImage: (id) => dispatch(deleteImage(id))
   }
 }
 

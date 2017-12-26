@@ -13,8 +13,8 @@ import moment from 'moment';
 
 export default class ListItem extends Component {
 
-onPress(){
-
+onPress(id){
+  this.props.deleteImage(id)
  }
 
   render() {
@@ -35,6 +35,7 @@ onPress(){
           })
         }
        </View>
+       <Button title={'delete'} onPress={()=>this.onPress(item.id)} ></Button>
             </View>
       </TouchableHighlight>
     );

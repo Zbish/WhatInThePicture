@@ -1,4 +1,4 @@
-import {ADD_IMAGE,SEARCH } from './constant';
+import {ADD_IMAGE,SEARCH,DELETE_IMAGE } from './constant';
 
 
 export function AddImage(image){
@@ -12,5 +12,11 @@ export function Search(val){
     return {
         type: SEARCH,
         val
+    }
+}
+export function deleteImage(id){
+    return {
+        type: DELETE_IMAGE,
+        id
     }
 }

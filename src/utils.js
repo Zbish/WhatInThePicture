@@ -76,3 +76,9 @@ const options = {
     }
    }
   
+   export const deleteImage = function(array,id){
+    var clone =  _.cloneDeep(array);
+
+    console.log('sabababutils' ,clone)
+
+   }

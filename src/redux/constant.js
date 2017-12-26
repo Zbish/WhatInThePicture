@@ -2,8 +2,10 @@
 
 const ADD_IMAGE = 'ADD_IMAGE';
 const SEARCH = 'SEARCH';
+const DELETE_IMAGE = 'DELETE_IMAGE'
 
 export {
   ADD_IMAGE,
-  SEARCH
+  SEARCH,
+  DELETE_IMAGE
 };
