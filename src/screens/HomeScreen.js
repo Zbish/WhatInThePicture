@@ -27,6 +27,7 @@ class HomeScreen extends Component {
     this.props.Search(val)
   }
   render() {
+    console.log('state' , this.props)
     const images = this.props.images
     const search = this.props.searchResult
     const value = this.props.currentValue
@@ -78,6 +79,7 @@ function mapStateToProps(state) {
     images: state.images.images,
     currentValue: state.images.currentValue,
     searchResult: state.images.searchResult,
+    loading:state.images.loading
   }
 }
 

@@ -4,6 +4,7 @@ import {incrementalSearch, getData,saveData}from '../../utils'
 const images = []
 const currentValue = ''
 const searchResult = []
+const loading = true
 
 export default (state, action) => {
   switch (action.type) {
@@ -26,6 +27,7 @@ export default (state, action) => {
         images: images,
         currentValue:currentValue,
         searchResult:searchResult,
+        loading:loading
       };
   }
 }
