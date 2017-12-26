@@ -1,13 +1,24 @@
 import React, { Component } from 'react';
-import {Platform} from 'react-native';
+import {Platform,ActivityIndicator} from 'react-native';
 import Navigator from './src/screens/navigator'
 import { connect, Provider } from 'react-redux';
 import { addNavigationHelpers } from "react-navigation";
 import configureStore from './src/redux/configureStore'
 import {getData} from'./src/utils'
+import { PersistGate } from 'redux-persist/es/integration/react'
 
 process.nextTick = setImmediate
-const store = configureStore()
+const { persistor, store }  = configureStore()
+const onBeforeLift = () => {
+ 
+  getData().then((value) => {
+    console.log('getData2' , value)
+  // persistStore(store, { storage: AsyncStorage }, () => {
+  //   this.setState({ rehydrated: true })
+  // })
+  })
+  
+}
 const AppWithNavigationState = connect(state => {
   return {
     nav: state.nav,
@@ -18,21 +29,20 @@ const AppWithNavigationState = connect(state => {
 
 class App extends Component {
   componentWillMount(){
-  //  getData().then((value) => {
-  //     console.log('getData2' , value)
-    // persistStore(store, { storage: AsyncStorage }, () => {
-    //   this.setState({ rehydrated: true })
-    // })
-  
-    // })
+
     
   }
   render() {
     // if (!this.state.rehydrate) return <Text>Loading...</Text>
     return (
       <Provider store={store}>
+      <PersistGate 
+        loading={<ActivityIndicator size="large" color="#0000ff" />}
+        onBeforeLift={onBeforeLift}
+        persistor={persistor}>
         <AppWithNavigationState />
-      </Provider>
+      </PersistGate>
+    </Provider>
     );
   }
 }

@@ -8,12 +8,12 @@ var pictures =[]
 //   return(value)
 // })
 // console.log('to' , to)
-
 const images = []
 const currentValue = ''
 const searchResult = []
 
 export default (state, action) => {
+  console.log('state' , state)
   switch (action.type) {
     case ADD_IMAGE:
     return{
