@@ -11,18 +11,12 @@ import {
   TextInput
 } from 'react-native';
 import ListItem from '../component/ListItem'
-import {incrementalSearch, getImage}from '../utils'
+import {getImage}from '../utils'
 import { connect } from 'react-redux'
-import { addPerson, deletePerson,AddImage} from '../redux/actions'
+import {AddImage,Search} from '../redux/actions'
 
 class HomeScreen extends Component {
 
-componentWillMount() {
-    this.setState({
-      currentValue: '',
-    //   images:this.props.screenProps.images
-    });
-  }
 onPress(){
   var images
   getImage().then((newImage)=>{ 
@@ -35,16 +29,14 @@ this.props.navigation.navigate("ImageScreen",{item:item});
 }
 onChange(val)
 {
-    this.setState({currentValue:val})
-   var searchElement = incrementalSearch(this.props.screenProps.images,val)
-   this.props.screenProps.addSearch(searchElement)
+    this.props.Search(val)
 }
   render() {
-    console.log("home" , this.props.images)
+  
       var show
       var images = this.props.images
-      var search = this.props.screenProps.searchResult
-        if(this.state.currentValue){
+      var search = this.props.searchResult
+        if(this.props.currentValue){
             show = search
         }
         else{
@@ -52,12 +44,12 @@ onChange(val)
         }
     return (
       <View style={styles.container}>
-          <TextInput underLineColorAndroid='transparent'
+          <TextInput 
               placeholderTextColor="black"
               placeholder='Search'
               style={styles.textInput}
               onChangeText={(val) => this.onChange(val)}
-              value={this.state.currentValue}
+              value={this.props.currentValue}
             />
             <FlatList
                           data={show}
@@ -93,15 +85,16 @@ const styles = StyleSheet.create({
 
 function mapStateToProps (state) {
   return {
-    images: state.images.images
+    images: state.images.images,
+    currentValue: state.images.currentValue,
+    searchResult: state.images.searchResult
   }
 }
 
 function mapDispatchToProps (dispatch) {
   return {
-    dispatchAddPerson: (person) => dispatch(addPerson(person)),
-    dispatchdeletePerson: (person) => dispatch(deletePerson(person)),
-    AddImage: (image) => dispatch(AddImage(image))
+    AddImage: (image) => dispatch(AddImage(image)),
+    Search:(val) => dispatch(Search(val))
   }
 }
 

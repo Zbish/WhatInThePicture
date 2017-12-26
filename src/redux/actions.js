@@ -1,18 +1,5 @@
-import { ADD_PERSON, DELETE_PERSON,ADD_IMAGE, } from './constant';
+import {ADD_IMAGE,SEARCH } from './constant';
 
-export function addPerson(person) {
-  return {
-    type: 'ADD_PERSON',
-    person,
-  };
-}
-
-export function deletePerson(person) {
-  return {
-    type: 'DELETE_PERSON',
-    person,
-  };
-}
 
 export function AddImage(image){
     return {
@@ -20,3 +7,10 @@ export function AddImage(image){
         image
       };
     }
+
+export function Search(val){
+    return {
+        type: SEARCH,
+        val
+    }
+}
