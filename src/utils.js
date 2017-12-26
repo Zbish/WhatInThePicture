@@ -26,8 +26,13 @@ const options = {
             ImagePicker.showImagePicker(options, (response)  => {
                 var cons = getImageConcepts2(response.data).then((value) => {
                      var concepts = value.outputs[0].data.concepts
+                     var newConcepts = []   
+                     for(var i = 0 ; i < concepts.length ; i++)
+                      {
+                        newConcepts.push(concepts[i].name)
+                      }
                      var time = new Date
-                     var item = {id:guid,image:response.uri,consepts:concepts,taken:time}
+                     var item = {id:guid,image:response.uri,consepts:newConcepts,taken:time}
             resolve(item)})
       } )
      })
@@ -35,15 +40,23 @@ const options = {
    export const incrementalSearch = function(array,value){
     var clone =  _.cloneDeep(array);
     var str = value;
-    var res = str.split(" ");
-    var newArray = clone
-    var item = []
-      for(var i = 0 ; i < res.length-1 ; i++ )
-        {
-          var item = _.filter(newArray, { consepts: [{ name: res[i] }] });
-          var newArray = item
-        }
+    var string = 'omri '
+    // var res = str.split(" ");
+    // var newArray = clone
+    // var item = []
+    //   for(var i = 0 ; i < res.length-1 ; i++ )
+    //     {
+    //       var item = _.filter(newArray, { consepts: [{ name: res[i] }] });
+    //       var newArray = item
+    //     }
+       var sort = []
+       _.filter(clone,(item)=>{
+         
+         console.log('hoho' , item)
        
+       } );
+       console.log('sort' , sort)
+       var item = []
     return item
    }
   const uuidv4 = function() {
