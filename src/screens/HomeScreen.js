@@ -78,10 +78,10 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    images: state.rootReducer.images.images,
-    currentValue: state.rootReducer.images.currentValue,
-    searchResult: state.rootReducer.images.searchResult,
-    pictures: state.rootReducer.images.pictures
+    images: state.images.images,
+    currentValue: state.images.currentValue,
+    searchResult: state.images.searchResult,
+    pictures: state.images.pictures
   }
 }
 

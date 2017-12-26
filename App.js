@@ -11,13 +11,6 @@ process.nextTick = setImmediate
 const { persistor, store }  = configureStore()
 const onBeforeLift = () => {
  
-  getData().then((value) => {
-    console.log('getData2' , value)
-  // persistStore(store, { storage: AsyncStorage }, () => {
-  //   this.setState({ rehydrated: true })
-  // })
-  })
-  
 }
 const AppWithNavigationState = connect(state => {
   return {
@@ -33,7 +26,6 @@ class App extends Component {
     
   }
   render() {
-    // if (!this.state.rehydrate) return <Text>Loading...</Text>
     return (
       <Provider store={store}>
       <PersistGate 

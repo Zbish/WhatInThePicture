@@ -1,7 +1,7 @@
 // configureStore.js
 
 import { createStore, combineReducers } from 'redux'
-import rootReducer from './reducers'
+import images from './reducers/images'
 import RootStackNavigator from '../screens/navigator';
 import {
   persistReducer,
@@ -22,7 +22,7 @@ const config = {
 };
 const appReducer = persistCombineReducers(config, {
   nav: navReducer,
-  rootReducer
+  images
 });
 
 export default function configureStore() {
