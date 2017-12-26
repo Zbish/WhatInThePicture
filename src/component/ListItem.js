@@ -21,7 +21,6 @@ onPress(id){
       var item = this.props.item
       var time = item.taken
       var concepts = item.consepts
-      
     return (
         <TouchableHighlight style={styles.wrapper} underlayColor='grey' onPress={() => this.props.onPress(item)}>
             <View style={styles.container}>

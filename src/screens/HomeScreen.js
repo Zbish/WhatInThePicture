@@ -30,7 +30,6 @@ class HomeScreen extends Component {
     const search = this.props.searchResult
     const value = this.props.currentValue
     const show = value ? search : images
-
     return (
       <View style={styles.container}>
         <TextInput
