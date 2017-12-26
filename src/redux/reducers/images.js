@@ -1,6 +1,13 @@
 // reducers/images.js
 import {ADD_IMAGE,SEARCH } from '../constant';
-import {incrementalSearch}from '../../utils'
+import {incrementalSearch, getData,saveData}from '../../utils'
+var pictures =[]
+// var to = getData().then((value) => {
+//   console.log('getData' , value)
+
+//   return(value)
+// })
+// console.log('to' , to)
 
 const images = []
 const currentValue = ''
@@ -26,7 +33,8 @@ export default (state, action) => {
     return state || {
         images: images,
         currentValue:currentValue,
-        searchResult:searchResult
+        searchResult:searchResult,
+        pictures:pictures
       };
   }
 }

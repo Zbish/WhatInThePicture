@@ -8,17 +8,19 @@ import {
   TextInput
 } from 'react-native';
 import ListItem from '../component/ListItem'
-import { getImage } from '../utils'
+import { getImage,saveData } from '../utils'
 import { connect } from 'react-redux'
 import { AddImage, Search } from '../redux/actions'
 
 class HomeScreen extends Component {
 
   onPress() {
+    console.log('state' ,this.props.images)
     getImage().then((newImage) => {
       this.props.AddImage(newImage)
+      console.log('state2' ,this.props.images)
+      saveData(this.props.images)
     })
-
   }
   navigateTo(item) {
     this.props.navigation.navigate("ImageScreen", { item: item });
@@ -27,6 +29,7 @@ class HomeScreen extends Component {
     this.props.Search(val)
   }
   render() {
+    console.log('mystate' , this.props)
     const images = this.props.images
     const search = this.props.searchResult
     const value = this.props.currentValue
@@ -77,7 +80,8 @@ function mapStateToProps(state) {
   return {
     images: state.rootReducer.images.images,
     currentValue: state.rootReducer.images.currentValue,
-    searchResult: state.rootReducer.images.searchResult
+    searchResult: state.rootReducer.images.searchResult,
+    pictures: state.rootReducer.images.pictures
   }
 }
 

@@ -1,6 +1,7 @@
 import Clarifai from 'clarifai';
 import _ from 'lodash';
 import ImagePicker from 'react-native-image-picker'
+import {AsyncStorage} from'react-native'
 
 const app = new Clarifai.App({
     apiKey: 'b5bfcb7aba854f9da7b6d6e418d778cb'
@@ -31,10 +32,6 @@ const options = {
       } )
      })
    }
-   export const getImageRedux = function(){
-     console.log('gogogo')
-   }
-
    export const incrementalSearch = function(array,value){
     var clone =  _.cloneDeep(array);
     var str = value;
@@ -49,31 +46,33 @@ const options = {
        
     return item
    }
-   const uuidv4 = function() {
-    return ([1e7]+-1e3+-4e3+-8e3+-1e11).replace(/[018]/g, c =>
-      (c ^ crypto.getRandomValues(new Uint8Array(1))[0] & 15 >> c / 4).toString(16)
-    )
+  const uuidv4 = function() {
+    function s4() {
+      return Math.floor((1 + Math.random()) * 0x10000)
+        .toString(16)
+        .substring(1);
+    }
+    return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
+      s4() + '-' + s4() + s4() + s4();
   }
+  export const getData = function(){
+    return new Promise( (resolve, reject) => {
+  try {
+    var data = AsyncStorage.getItem('@MySuperStore:key').then((value) =>{
+      resolve(JSON.parse(value))
+    })
+  } catch (error) {
+    console.log('error bring data' ,error)
+  }
+})
+ }
 
-  //  async function getData(){
-
-//   try {
-//     var data = await  AsyncStorage.getItem('@MySuperStore:key')
-//     if (data !== null){
-//       // We have data!!
-//       console.log('we have data2' ,JSON.parse(data))
-//     }
-//   } catch (error) {
-//     console.log('get eroor' ,error)
-//   }
-//  }
-
-//   function saveData(data){
-//     try {
-//       AsyncStorage.setItem('@MySuperStore:key',JSON.stringify(data));
-//       console.log('data save')
-//     } catch (error) {
-//       console.log('get eroor' ,error)
-//     }
-//    }
+  export const saveData = function(data){
+    try {
+      AsyncStorage.setItem('@MySuperStore:key',JSON.stringify(data));
+      console.log('sava data')
+    } catch (error) {
+      console.log('error saving data' ,error)
+    }
+   }
   
