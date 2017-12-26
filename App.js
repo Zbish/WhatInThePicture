@@ -1,21 +1,5 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- * @flow
- */
-
 import React, { Component } from 'react';
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  Image,
-  Button,
-  AsyncStorage
-} from 'react-native';
-import _ from 'lodash';
-import { getImage } from './src/utils'
+import {Platform} from 'react-native';
 import Navigator from './src/screens/navigator'
 import { connect, Provider } from 'react-redux';
 import { addNavigationHelpers } from "react-navigation";
@@ -32,10 +16,6 @@ const AppWithNavigationState = connect(state => {
 ));
 
 class App extends Component {
-
-  componentWillMount() {
-    // getData()
-  }
 
   render() {
     return (

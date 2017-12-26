@@ -1,11 +1,8 @@
 
 import React, { Component } from 'react';
 import {
-  Platform,
   StyleSheet,
-  Text,
   View,
-  Image,
   Button,
   FlatList,
   TextInput
@@ -30,29 +27,24 @@ class HomeScreen extends Component {
     this.props.Search(val)
   }
   render() {
-    console.log('state' , this.props)
-    var show
-    var images = this.props.images
-    var search = this.props.searchResult
-    if (this.props.currentValue) {
-      show = search
-    }
-    else {
-      show = images
-    }
+    const images = this.props.images
+    const search = this.props.searchResult
+    const value = this.props.currentValue
+    const show = value ? search : images
+
     return (
       <View style={styles.container}>
         <TextInput
-          placeholderTextColor="black"
           placeholder='Search'
           style={styles.textInput}
           onChangeText={(val) => this.onChange(val)}
-          value={this.props.currentValue}
+          value={value}
         />
         <FlatList
           data={show}
-          renderItem={({ item }) => <ListItem item={item}
-          onPress={(item) => this.navigateTo(item)} />}
+          renderItem={({ item }) =>
+            <ListItem item={item}
+              onPress={(item) => this.navigateTo(item)} />}
           keyExtractor={(item, index) => index}
         />
         <Button title={'Add Photo 2'} onPress={() => this.onPress()}></Button>
