@@ -1,12 +1,14 @@
 import Clarifai from 'clarifai';
 import _ from 'lodash';
 import ImagePicker from 'react-native-image-picker'
-import {AsyncStorage,Alert} from'react-native'
+import {Alert} from'react-native'
+
 // image recognition key
 const app = new Clarifai.App({
     apiKey: 'b5bfcb7aba854f9da7b6d6e418d778cb'
    });
-// image picker 
+
+// image picker options
 const options = {
     title: 'Select',
     customButtons: [
@@ -16,31 +18,34 @@ const options = {
       path: 'images'
     }
   };
+// get image and keywords
   export const getImage = function(){
     var guid = uuidv4()
     var time = new Date
              return new Promise( (resolve, reject) => {
             ImagePicker.showImagePicker(options, (response)  => {
                 getImageConcepts2(response.data).then((value) => {
-                     var concepts = value
+                     var keywords = value
                      var image = response.uri
-                     var item = {id:guid,image:image,consepts:concepts,taken:time}
+                     var item = {id:guid,image:image,keywords:keywords,taken:time}
             resolve(item)})
       } )
      })
    }
+
+  //  get keywords from api
    const getImageConcepts2 = function(image){
     var cons = [] 
     try {
       cons = app.models.predict(Clarifai.GENERAL_MODEL, {base64: image}).then(
       (response)=> {
         var concepts = response.outputs[0].data.concepts
-        var newConcepts = []   
+        var keywords = []   
         for(var i = 0 ; i < concepts.length ; i++)
          {
-           newConcepts.push(concepts[i].name)
+          keywords.push(concepts[i].name)
          }
-        return newConcepts
+        return keywords
       },
       (err)=> {
         Alert.alert(
@@ -66,7 +71,7 @@ const options = {
       {
         for(var i = 0 ; i < clone.length ; i++){
           
-          var newList = clone[i].consepts.filter((v) => {
+          var newList = clone[i].keywords.filter((v) => {
             return v.indexOf(res[j]) !== -1;
             })
             

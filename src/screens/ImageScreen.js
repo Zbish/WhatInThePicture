@@ -28,7 +28,7 @@ handleBackButtonClick() {
   render() {
     var item = this.props.navigation.state.params.item
     var time = item.taken
-    var concepts = item.consepts
+    var keywords = item.keywords
     var image = item.image
     return (
       <Container >
@@ -44,7 +44,7 @@ handleBackButtonClick() {
             </CardItem>
             <CardItem header style={styles.textContainer}>
               <Text style={styles.keywords}>keywords</Text>
-              <Text>{concepts.join(",   ")}</Text>
+              <Text>{keywords.join(",   ")}</Text>
             </CardItem>
           </Card>
         </Content>

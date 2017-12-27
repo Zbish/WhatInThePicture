@@ -13,7 +13,7 @@ export default class ListCard extends Component {
     render() {
         var item = this.props.item
         var time = item.taken
-        var concepts = item.consepts
+        var keywords = item.keywords
         return (
             <ListItem style={{marginLeft: 0}} onPress={() => this.props.onPress(item)}>
                 <Thumbnail style={styles.image} source={{ uri: item.image }} />
@@ -21,7 +21,7 @@ export default class ListCard extends Component {
                     <Text note>
                         taken :  {moment(time).format('LL')}
                     </Text>
-                    <Text style={styles.keywords}>{concepts.join(",  ")}</Text>
+                    <Text style={styles.keywords}>{keywords.join(",  ")}</Text>
                 </Body>
                 <Button transparent danger style={styles.button}
                     onPress={() => this.onPress(item.id)}>
