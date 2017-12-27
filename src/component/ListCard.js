@@ -15,7 +15,7 @@ export default class ListCard extends Component {
         var time = item.taken
         var concepts = item.consepts
         return (
-            <ListItem onPress={() => this.props.onPress(item)}>
+            <ListItem style={{marginLeft: 0}} onPress={() => this.props.onPress(item)}>
                 <Thumbnail style={styles.image} source={{ uri: item.image }} />
                 <Body>
                     <Text note>
