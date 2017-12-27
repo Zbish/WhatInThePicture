@@ -3,16 +3,14 @@ import React, { Component } from 'react';
 import {
   StyleSheet,
   View,
-  Button,
   FlatList,
   TextInput
 } from 'react-native';
-import ListItem from '../component/ListItem'
 import ListCard from '../component/ListCard'
-import { getImage,saveData } from '../utils'
+import { getImage, saveData } from '../utils'
 import { connect } from 'react-redux'
-import { AddImage, Search,deleteImage } from '../redux/actions'
-import { Container, Header, Content, List } from 'native-base';
+import { AddImage, Search, deleteImage } from '../redux/actions'
+import { Container, Header,Fab, Content, List, Button, Text, Form, Item, Input, Label } from 'native-base';
 
 class HomeScreen extends Component {
 
@@ -34,48 +32,50 @@ class HomeScreen extends Component {
     const show = value ? search : images
     return (
       <Container>
-        <TextInput
-          placeholder='Search'
-          style={styles.textInput}
-          onChangeText={(val) => this.onChange(val)}
-          value={value}
-        />
+        <Form>
+        <Item rounded>
+            <Input
+              onChangeText={(val) => this.onChange(val)}
+              value={value}
+              placeholder='Search'
+              style={styles.textInput}
+            />
+          </Item>
+        </Form>
         <Content>
-        <List>
-        <FlatList
-          data={show}
-          renderItem={({ item }) =>
-            <ListCard item={item}
-              deleteImage={(id)=>this.props.deleteImage(id)}
-              onPress={(item) => this.navigateTo(item)} />}
-          keyExtractor={(item, index) => index}
-        />
-        </List>
+          <List>
+            <FlatList
+              data={show}
+              renderItem={({ item }) =>
+                <ListCard item={item}
+                  deleteImage={(id) => this.props.deleteImage(id)}
+                  onPress={(item) => this.navigateTo(item)} />}
+              keyExtractor={(item, index) => index}
+            />
+          </List>
         </Content>
-        <Button title={'Add Photo 2'} onPress={() => this.onPress()}></Button>
+        <Button rounded warning
+          onPress={() => this.onPress()}>
+          <Text>Add Photo</Text>
+        </Button>
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#F5FCFF',
-  },
   textInput: {
     color: '#000000',
     alignSelf: 'stretch',
     padding: 5,
     margin: 10,
-    marginBottom: 10,
+    marginBottom: 5,
     backgroundColor: 'rgba(122, 186, 122,0.7)',
     borderColor: '#fff',
     borderRadius: 10,
     borderWidth: 0.6,
   },
+ 
 });
 
 function mapStateToProps(state) {
