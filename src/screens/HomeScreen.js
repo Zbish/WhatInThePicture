@@ -8,10 +8,11 @@ import {
   TextInput
 } from 'react-native';
 import ListItem from '../component/ListItem'
+import ListCard from '../component/ListCard'
 import { getImage,saveData } from '../utils'
 import { connect } from 'react-redux'
 import { AddImage, Search,deleteImage } from '../redux/actions'
-
+import { Container, Header, Content, List } from 'native-base';
 
 class HomeScreen extends Component {
 
@@ -32,23 +33,27 @@ class HomeScreen extends Component {
     const value = this.props.currentValue
     const show = value ? search : images
     return (
-      <View style={styles.container}>
+      <Container>
         <TextInput
           placeholder='Search'
           style={styles.textInput}
           onChangeText={(val) => this.onChange(val)}
           value={value}
         />
+        <Content>
+        <List>
         <FlatList
           data={show}
           renderItem={({ item }) =>
-            <ListItem item={item}
+            <ListCard item={item}
               deleteImage={(id)=>this.props.deleteImage(id)}
               onPress={(item) => this.navigateTo(item)} />}
           keyExtractor={(item, index) => index}
         />
+        </List>
+        </Content>
         <Button title={'Add Photo 2'} onPress={() => this.onPress()}></Button>
-      </View>
+      </Container>
     );
   }
 }
