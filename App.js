@@ -8,6 +8,7 @@ import {getData} from'./src/utils'
 import { PersistGate } from 'redux-persist/es/integration/react'
 
 process.nextTick = setImmediate
+console.disableYellowBox = true;
 const { persistor, store }  = configureStore()
 const onBeforeLift = () => {
  
