@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Platform,ActivityIndicator} from 'react-native';
+import {Platform,ActivityIndicator,StatusBar} from 'react-native';
 import Navigator from './src/screens/navigator'
 import { connect, Provider } from 'react-redux';
 import { addNavigationHelpers } from "react-navigation";
@@ -32,6 +32,9 @@ class App extends Component {
         loading={<ActivityIndicator size="large" color="#0000ff" />}
         onBeforeLift={onBeforeLift}
         persistor={persistor}>
+        <StatusBar
+          backgroundColor="#512DA8"
+        />
         <AppWithNavigationState />
       </PersistGate>
     </Provider>

@@ -4,13 +4,13 @@ import {
   StyleSheet,
   View,
   FlatList,
-  TextInput
+  TextInput,
 } from 'react-native';
 import ListCard from '../component/ListCard'
 import { getImage, saveData } from '../utils'
 import { connect } from 'react-redux'
 import { AddImage, Search, deleteImage } from '../redux/actions'
-import { Container, Header,Fab, Content, List, Button, Text, Form, Item, Input, Label } from 'native-base';
+import { Container, Header,Fab, Content, List,ListItem, Button, Text, Form, Item, Input, Label } from 'native-base';
 
 class HomeScreen extends Component {
 
@@ -33,7 +33,7 @@ class HomeScreen extends Component {
     return (
       <Container>
         <Form>
-        <Item rounded>
+        <Item regular>
             <Input
               onChangeText={(val) => this.onChange(val)}
               value={value}
@@ -42,8 +42,6 @@ class HomeScreen extends Component {
             />
           </Item>
         </Form>
-        <Content>
-          <List>
             <FlatList
               data={show}
               renderItem={({ item }) =>
@@ -52,11 +50,9 @@ class HomeScreen extends Component {
                   onPress={(item) => this.navigateTo(item)} />}
               keyExtractor={(item, index) => index}
             />
-          </List>
-        </Content>
-        <Button rounded warning
+        <Button style={styles.button}
           onPress={() => this.onPress()}>
-          <Text>Add Photo</Text>
+          <Text>ADD</Text>
         </Button>
       </Container>
     );
@@ -68,14 +64,22 @@ const styles = StyleSheet.create({
     color: '#000000',
     alignSelf: 'stretch',
     padding: 5,
-    margin: 10,
+    margin: 5,
     marginBottom: 5,
-    backgroundColor: 'rgba(122, 186, 122,0.7)',
+    backgroundColor: '#D1C4E9',
     borderColor: '#fff',
     borderRadius: 10,
     borderWidth: 0.6,
   },
- 
+ button:{
+  width: 60,  
+  height: 60,   
+  borderRadius: 30,            
+  backgroundColor: '#FF5722',                                    
+  position: 'absolute',                                          
+  bottom: 10,                                                    
+  right: 10, 
+ }
 });
 
 function mapStateToProps(state) {

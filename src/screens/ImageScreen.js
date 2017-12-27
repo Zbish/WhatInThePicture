@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
   },
   keywords: {
-    color: 'green',
+    color: '#FF5722',
     fontSize: 20,
     fontWeight: 'bold',
   },
