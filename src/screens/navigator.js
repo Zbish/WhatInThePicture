@@ -17,7 +17,6 @@ export default RootStackNavigator = StackNavigator(
     ImageScreen: {
         screen: imagescreen,
         navigationOptions: {
-          title: 'ImageScreen',
           headerStyle: { backgroundColor: '#388E3C' },
           headerTitleStyle: { color: '#FFFFFF' },
           headerTintColor: '#FFFFFF'

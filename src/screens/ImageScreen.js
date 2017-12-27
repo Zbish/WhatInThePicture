@@ -5,10 +5,12 @@ import {
   Image,
 } from 'react-native';
 import moment from 'moment'
-import { Container, Header,Text, Content, Footer, Card, CardItem, Title } from 'native-base';
+import { Container,Text, Content, Card, CardItem} from 'native-base';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 export default class ImageScreen extends Component {
 
+  
   render() {
     var item = this.props.navigation.state.params.item
     var time = item.taken
@@ -19,44 +21,39 @@ export default class ImageScreen extends Component {
       <Container >
         <Content>
           <Card>
-            <CardItem>
-              {/* <Thumbnail source={require('./img/guitar.jpeg')} /> */}
-              <Text>{moment(time).format('dddd ,LL')}</Text>
+            <CardItem header>
+            <Icon name="date-range" size={30} color="#900" />
+              <Text> Date Taken :</Text>
+              <Text note>{moment(time).format('dddd ,LL')}</Text>
             </CardItem>
-            <CardItem  cardBody>
-              <Image style={{ width:100,height:100}} source={{uri: image}} />
+            <CardItem style={styles.imageContainer}  cardBody>
+              <Image style={styles.image} source={{uri: image}} />
             </CardItem>
-            <CardItem>
-              {
-                concepts.map((item, index) => {
-                  return <Text key={index}>{item} </Text>
-                })
-              }
-
+            <CardItem header style={styles.textContainer}>
+              <Text style={styles.keywords}>keywords</Text>
+              <Text>{concepts.join(",   ")}</Text>
             </CardItem>
           </Card>
         </Content>
       </Container>
-
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    height: 200,
-    backgroundColor: '#F5FCFF',
-  },
-  container: {
-    flexDirection: 'row',
+  imageContainer:{
+    justifyContent:'center'
   },
   image: {
-    width: 150,
-    height: 150
+    width: 200,
+    height: 300
   },
-  concepts: {
-    flexWrap: 'wrap'
-  }
+  textContainer:{
+    flexDirection:'column',
+  },
+  keywords:{
+     color:'green',
+     fontSize:20,
+     fontWeight: 'bold',
+  },
 });
