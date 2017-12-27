@@ -2,24 +2,20 @@ import Clarifai from 'clarifai';
 import _ from 'lodash';
 import ImagePicker from 'react-native-image-picker'
 import {AsyncStorage} from'react-native'
-
+// image recognition key
 const app = new Clarifai.App({
     apiKey: 'b5bfcb7aba854f9da7b6d6e418d778cb'
    });
+// image picker 
 const options = {
     title: 'Select',
     customButtons: [
-    //   {name: 'fb', title: 'Choose Photo from Facebook'},
     ],
     storageOptions: {
       skipBackup: true,
       path: 'images'
     }
   };
-  const getImageConcepts2 = function(image){
-    var concept = app.models.predict(Clarifai.GENERAL_MODEL, {base64: image})
-    return  concept
-    }
   export const getImage = function(){
     var guid = uuidv4()
              return new Promise( (resolve, reject) => {
@@ -37,6 +33,12 @@ const options = {
       } )
      })
    }
+   const getImageConcepts2 = function(image){
+    var concept = app.models.predict(Clarifai.GENERAL_MODEL, {base64: image})
+    return  concept
+    }
+    
+    // incremental Search
    export const incrementalSearch = function(array,value){
     var clone =  _.cloneDeep(array);
     var newArray = []
@@ -59,6 +61,8 @@ const options = {
       }
     return clone
    }
+
+  // generate unique id
   const uuidv4 = function() {
     function s4() {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -68,27 +72,8 @@ const options = {
     return s4() + s4() + '-' + s4() + '-' + s4() + '-' +
       s4() + '-' + s4() + s4() + s4();
   }
-  export const getData = function(){
-    return new Promise( (resolve, reject) => {
-  try {
-    var data = AsyncStorage.getItem('@MySuperStore:key').then((value) =>{
-      resolve(JSON.parse(value))
-    })
-  } catch (error) {
-    console.log('error bring data' ,error)
-  }
-})
- }
 
-  export const saveData = function(data){
-    try {
-      AsyncStorage.setItem('@MySuperStore:key',JSON.stringify(data));
-      console.log('sava data')
-    } catch (error) {
-      console.log('error saving data' ,error)
-    }
-   }
-  
+  // delete image from list
    export const deleteImage = function(array,id){
     var clone =  _.cloneDeep(array);
     var index = _.findIndex(clone, function(o) { return o.id == id; });
