@@ -1,16 +1,11 @@
 
 import React, { Component } from 'react';
-import {
-  StyleSheet,
-  View,
-  FlatList,
-  TextInput,
-} from 'react-native';
+import { StyleSheet, FlatList, } from 'react-native';
 import ListCard from '../component/ListCard'
 import { getImage, saveData } from '../utils'
 import { connect } from 'react-redux'
 import { AddImage, Search, deleteImage } from '../redux/actions'
-import { Container, Header,Fab, Content, List,ListItem, Button, Text, Form, Item, Input, Label } from 'native-base';
+import { Container, Button, Text, Form, Item, Input } from 'native-base';
 
 class HomeScreen extends Component {
 
@@ -33,7 +28,7 @@ class HomeScreen extends Component {
     return (
       <Container>
         <Form>
-        <Item regular>
+          <Item regular>
             <Input
               onChangeText={(val) => this.onChange(val)}
               value={value}
@@ -42,14 +37,14 @@ class HomeScreen extends Component {
             />
           </Item>
         </Form>
-            <FlatList
-              data={show}
-              renderItem={({ item }) =>
-                <ListCard item={item}
-                  deleteImage={(id) => this.props.deleteImage(id)}
-                  onPress={(item) => this.navigateTo(item)} />}
-              keyExtractor={(item, index) => index}
-            />
+        <FlatList
+          data={show}
+          renderItem={({ item }) =>
+            <ListCard item={item}
+              deleteImage={(id) => this.props.deleteImage(id)}
+              onPress={(item) => this.navigateTo(item)} />}
+          keyExtractor={(item, index) => index}
+        />
         <Button style={styles.button}
           onPress={() => this.onPress()}>
           <Text>ADD</Text>
@@ -71,15 +66,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     borderWidth: 0.6,
   },
- button:{
-  width: 60,  
-  height: 60,   
-  borderRadius: 30,            
-  backgroundColor: '#FF5722',                                    
-  position: 'absolute',                                          
-  bottom: 10,                                                    
-  right: 10, 
- }
+  button: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#FF5722',
+    position: 'absolute',
+    bottom: 10,
+    right: 10,
+  }
 });
 
 function mapStateToProps(state) {
