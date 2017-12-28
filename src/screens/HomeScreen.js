@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, } from 'react-native';
+import { StyleSheet, FlatList,KeyboardAvoidingView } from 'react-native';
 import ListCard from '../component/ListCard'
 import { getImage, saveData } from '../utils'
 import { connect } from 'react-redux'
@@ -18,7 +18,8 @@ class HomeScreen extends Component {
     this.props.navigation.navigate("ImageScreen", { item: item });
   }
   onChange(val) {
-    this.props.Search(val)
+    var lowerVal = val.toLowerCase()
+    this.props.Search(lowerVal)
   }
   render() {
     const images = this.props.images
@@ -27,6 +28,7 @@ class HomeScreen extends Component {
     const show = value ? search : images
     return (
       <Container>
+    
         <Form>
           <Item regular>
             <Input
@@ -45,11 +47,14 @@ class HomeScreen extends Component {
               onPress={(item) => this.navigateTo(item)} />}
           keyExtractor={(item, index) => index}
         />
+        
+    
         <Button style={styles.button}
           onPress={() => this.onPress()}>
           <Text>ADD</Text>
         </Button>
       </Container>
+      
     );
   }
 }

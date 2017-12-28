@@ -9,22 +9,22 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { BackHandler } from 'react-native';
 
 export default class ImageScreen extends Component {
-constructor(){
-  super()
-  this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-}
-componentWillMount() {
-  BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
-}
+  constructor() {
+    super()
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
+  componentWillMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
 
-componentWillUnmount() {
-  BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
-}
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackButtonClick);
+  }
 
-handleBackButtonClick() {
-  this.props.navigation.goBack(null);
-  return true;
-}
+  handleBackButtonClick() {
+    this.props.navigation.goBack(null);
+    return true;
+  }
   render() {
     var item = this.props.navigation.state.params.item
     var time = item.taken
@@ -44,7 +44,7 @@ handleBackButtonClick() {
             </CardItem>
             <CardItem header style={styles.textContainer}>
               <Text style={styles.keywords}>keywords</Text>
-              <Text>{keywords.join(",   ")}</Text>
+              <Text style={{textAlign: 'center'}}>{keywords.join(",   ")}</Text>
             </CardItem>
           </Card>
         </Content>

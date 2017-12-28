@@ -17,7 +17,7 @@ const navReducer = (state, action) => {
 };
 const config = {
   key: 'root',
-  storage:storage,
+  storage: storage,
   images: ['@MySuperStore:key'],
 };
 const appReducer = persistCombineReducers(config, {

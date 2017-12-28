@@ -15,13 +15,13 @@ export default RootStackNavigator = StackNavigator(
       }
     },
     ImageScreen: {
-        screen: imagescreen,
-        navigationOptions: {
-          headerStyle: { backgroundColor: '#673AB7' },
-          headerTitleStyle: { color: '#FFFFFF' },
-          headerTintColor: '#FFFFFF'
-        }
-      },
+      screen: imagescreen,
+      navigationOptions: {
+        headerStyle: { backgroundColor: '#673AB7' },
+        headerTitleStyle: { color: '#FFFFFF' },
+        headerTintColor: '#FFFFFF'
+      }
+    },
   },
   {
     initialRouteName: 'HomeScreen'
