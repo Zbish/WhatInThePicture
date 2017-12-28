@@ -1,4 +1,4 @@
-import {ADD_IMAGE,SEARCH,DELETE_IMAGE } from './constant';
+import {ADD_IMAGE,SEARCH,DELETE_IMAGE,LOADING_IMAGE } from './constant';
 
 
 export function AddImage(image){
@@ -18,5 +18,11 @@ export function deleteImage(id){
     return {
         type: DELETE_IMAGE,
         id
+    }
+}
+export function loadingImage(val){
+    return {
+        type: LOADING_IMAGE,
+        val
     }
 }
