@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, FlatList, ActivityIndicator,View } from 'react-native';
 import ListCard from '../component/ListCard'
 import { getImage, saveData } from '../utils'
 import { connect } from 'react-redux'
@@ -10,13 +10,10 @@ import { Container, Content, Button, Text, Form, Item, Input } from 'native-base
 class HomeScreen extends Component {
 
   onPress() {
-    console.log('state', this.props)
     this.props.loadingImage(false)
     getImage().then((newImage) => {
       this.props.AddImage(newImage)
-      console.log('state', this.props)
       this.props.loadingImage(true)
-      console.log('state', this.props)
     })
   }
   navigateTo(item) {
@@ -30,7 +27,7 @@ class HomeScreen extends Component {
     if (condition) {
       return content;
     } else {
-      return <ActivityIndicator size="large" color="#0000ff" />;
+      return <View style={{flex:1,justifyContent: 'center'}}><ActivityIndicator size="large" color="#0000ff" /></View>;
     }
   }
   render() {
