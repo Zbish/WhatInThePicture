@@ -25,12 +25,12 @@ export const getImage = function () {
   return new Promise((resolve, reject) => {
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
-      resolve(null)
+        resolve(null)
       }
       else if (response.error) {
         resolve(null)
       }
-      else{
+      else {
         getImageConcepts2(response.data).then((value) => {
           var keywords = value
           var image = response.uri
@@ -38,7 +38,7 @@ export const getImage = function () {
           resolve(item)
         })
       }
-      
+
     })
   })
 }

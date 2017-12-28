@@ -10,16 +10,16 @@ export default RootStackNavigator = StackNavigator(
       navigationOptions: {
         title: 'What In The Picture',
         headerStyle: { backgroundColor: '#673AB7' },
-        headerTitleStyle: { color: '#FFFFFF' },
-        headerTintColor: '#FFFFFF'
+        headerTitleStyle: { color: 'white' },
+        headerTintColor: 'white'
       }
     },
     ImageScreen: {
       screen: imagescreen,
       navigationOptions: {
         headerStyle: { backgroundColor: '#673AB7' },
-        headerTitleStyle: { color: '#FFFFFF' },
-        headerTintColor: '#FFFFFF'
+        headerTitleStyle: { color: 'white' },
+        headerTintColor: 'white'
       }
     },
   },

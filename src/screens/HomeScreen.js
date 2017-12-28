@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, FlatList, ActivityIndicator,View } from 'react-native';
+import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native';
 import ListCard from '../component/ListCard'
 import { getImage, saveData } from '../utils'
 import { connect } from 'react-redux'
@@ -12,9 +12,9 @@ class HomeScreen extends Component {
   onPress() {
     this.props.loadingImage(false)
     getImage().then((newImage) => {
-     if(newImage != null){
-      this.props.AddImage(newImage)
-     }
+      if (newImage != null) {
+        this.props.AddImage(newImage)
+      }
       this.props.loadingImage(true)
     })
   }
@@ -29,7 +29,9 @@ class HomeScreen extends Component {
     if (condition) {
       return content;
     } else {
-      return <View style={{flex:1,justifyContent: 'center'}}><ActivityIndicator size="large" color="#0000ff" /></View>;
+      return <View style={styles.indicator}>
+                    <ActivityIndicator size="large" color="#FF5722" />
+            </View>;
     }
   }
   render() {
@@ -49,7 +51,7 @@ class HomeScreen extends Component {
             />
           </Item>
         </Form>
-        <FlatList 
+        <FlatList
           data={show}
           renderItem={({ item }) =>
             <ListCard item={item}
@@ -62,7 +64,7 @@ class HomeScreen extends Component {
         </Button>
       </Container>)
     );
-}
+  }
 }
 
 const styles = StyleSheet.create({
@@ -86,8 +88,9 @@ const styles = StyleSheet.create({
     bottom: 10,
     right: 10,
   },
-  content: {
-    flex: 1
+  indicator: {
+    flex: 1,
+    justifyContent: 'center'
   }
 });
 
