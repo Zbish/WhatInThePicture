@@ -12,7 +12,9 @@ class HomeScreen extends Component {
   onPress() {
     this.props.loadingImage(false)
     getImage().then((newImage) => {
+     if(newImage != null){
       this.props.AddImage(newImage)
+     }
       this.props.loadingImage(true)
     })
   }
@@ -47,7 +49,7 @@ class HomeScreen extends Component {
             />
           </Item>
         </Form>
-        <FlatList
+        <FlatList 
           data={show}
           renderItem={({ item }) =>
             <ListCard item={item}

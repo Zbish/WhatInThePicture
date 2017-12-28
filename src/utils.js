@@ -24,12 +24,21 @@ export const getImage = function () {
   var time = new Date
   return new Promise((resolve, reject) => {
     ImagePicker.showImagePicker(options, (response) => {
-      getImageConcepts2(response.data).then((value) => {
-        var keywords = value
-        var image = response.uri
-        var item = { id: guid, image: image, keywords: keywords, taken: time }
-        resolve(item)
-      })
+      if (response.didCancel) {
+      resolve(null)
+      }
+      else if (response.error) {
+        resolve(null)
+      }
+      else{
+        getImageConcepts2(response.data).then((value) => {
+          var keywords = value
+          var image = response.uri
+          var item = { id: guid, image: image, keywords: keywords, taken: time }
+          resolve(item)
+        })
+      }
+      
     })
   })
 }
