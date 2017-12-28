@@ -12,7 +12,7 @@ class HomeScreen extends Component {
   onPress() {
     this.props.loadingImage(false)
     getImage().then((newImage) => {
-      if (newImage != null) {
+      if (newImage) {
         this.props.AddImage(newImage)
       }
       this.props.loadingImage(true)

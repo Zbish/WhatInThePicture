@@ -11,7 +11,7 @@ export default (state, action) => {
     case ADD_IMAGE:
     return{
       ...state,
-      images: [...state.images, action.image],
+      images: [action.image,...state.images],
     };
     break;
     case SEARCH:

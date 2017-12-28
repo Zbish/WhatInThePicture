@@ -25,20 +25,20 @@ export const getImage = function () {
   return new Promise((resolve, reject) => {
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
-        resolve(null)
+        resolve()
       }
       else if (response.error) {
-        resolve(null)
+        resolve()
       }
       else {
         getImageConcepts2(response.data).then((value) => {
           var item
-          if(value != null){
+          if(value){
             var keywords = value
             var image = response.uri
             item = { id: guid, image: image, keywords: keywords, taken: time }
           }else{
-            item = null
+            item
           }
           resolve(item)
         })
@@ -69,7 +69,7 @@ const getImageConcepts2 = function (image) {
       }
     );
   } catch (error) {
-    return null
+    return
   }
   return cons
 }
