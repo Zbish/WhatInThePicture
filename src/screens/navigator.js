@@ -8,7 +8,7 @@ export default RootStackNavigator = StackNavigator(
     HomeScreen: {
       screen: homescreen,
       navigationOptions: {
-        title: 'What In The Picture',
+        title: "What's In The Picture",
         headerStyle: { backgroundColor: '#673AB7' },
         headerTitleStyle: { color: 'white' },
         headerTintColor: 'white'
