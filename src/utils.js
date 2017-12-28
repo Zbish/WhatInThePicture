@@ -32,9 +32,14 @@ export const getImage = function () {
       }
       else {
         getImageConcepts2(response.data).then((value) => {
-          var keywords = value
-          var image = response.uri
-          var item = { id: guid, image: image, keywords: keywords, taken: time }
+          var item
+          if(value != null){
+            var keywords = value
+            var image = response.uri
+            item = { id: guid, image: image, keywords: keywords, taken: time }
+          }else{
+            item = null
+          }
           resolve(item)
         })
       }
@@ -61,11 +66,10 @@ const getImageConcepts2 = function (image) {
           'cancelled',
           'check internet connection and try again',
         )
-        return Promise((resolve, reject) => { resolve(['problem']) })
       }
     );
   } catch (error) {
-
+    return null
   }
   return cons
 }
