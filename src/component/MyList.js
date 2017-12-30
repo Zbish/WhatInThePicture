@@ -2,21 +2,24 @@ import React, { Component } from 'react';
 import { StyleSheet, FlatList } from 'react-native';
 import { Form, Item, Input, Button, Text, Container } from 'native-base';
 import ListCard from '../component/ListCard'
+import {incrementalSearch} from '../utils'
 
 export default class MyList extends Component {
   constructor() {
     super()
     this.state = {
       searchValue: '',
+      search:[]
     }
   }
-  onChangeSearchValue(val) {
+  onChangeSearchValue(images,val) {
     this.setState({ searchValue: val })
-    this.props.searchforimage(val)
+    const result = incrementalSearch(images,val)
+    this.setState({search:result})
   }
   render() {
     const images = this.props.images
-    const search = this.props.search
+    const search = this.state.search
     const value = this.state.searchValue
     const show = value ? search : images
     return (
@@ -25,7 +28,7 @@ export default class MyList extends Component {
           <Item regular>
             <Input
               autoCapitalize='none'
-              onChangeText={(val) => this.onChangeSearchValue(val)}
+              onChangeText={(val) => this.onChangeSearchValue(images,val)}
               value={this.state.searchValue}
               placeholder='Search'
               style={styles.textInput}

@@ -1,6 +1,6 @@
-import {ADD_IMAGE,SEARCH,DELETE_IMAGE } from './constant';
-import {incrementalSearch,deletepic} from '../utils'
-
+// actions.js
+import {ADD_IMAGE,DELETE_IMAGE } from './constant';
+import {deletepic} from '../utils'
 
 export function AddImage(image){
     return {
@@ -9,13 +9,6 @@ export function AddImage(image){
       };
     }
 
-export function Search(array,val){
-    var searchElement = incrementalSearch(array,val)
-    return {
-        type: SEARCH,
-        searchElement
-    }
-}
 export function deleteImage(array,id){
     var newState = deletepic(array,id)
     return {
