@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Image,} from 'react-native';
+import { StyleSheet, Image, } from 'react-native';
 import moment from 'moment'
 import { Container, Text, Content, Card, CardItem } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
@@ -8,7 +8,7 @@ import { BackHandler } from 'react-native';
 
 export default class ImageScreen extends Component {
   static navigationOptions = ({ navigation }) => ({
-    headerLeft: <IconHeader name={'arrow-left'} size={25} color="white" 
+    headerLeft: <IconHeader name={'arrow-left'} size={25} color="white"
       style={{ padding: 10 }}
       onPress={() => navigation.goBack()} />,
   })
@@ -72,7 +72,4 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
-  goBack: {
-
-  }
 });

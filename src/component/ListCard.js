@@ -3,10 +3,15 @@ import React, { Component } from 'react';
 import { StyleSheet } from 'react-native';
 import moment from 'moment';
 import { ListItem, Thumbnail, Text, Body, Button, Icon } from 'native-base';
+
+
 export default class ListCard extends Component {
 
-    onPress(id) {
+    delete(id) {
         this.props.deleteImage(id)
+    }
+    navigate(item){
+        this.props.navigateToItem(item)
     }
 
     render() {
@@ -14,7 +19,7 @@ export default class ListCard extends Component {
         var time = item.taken
         var keywords = item.keywords
         return (
-            <ListItem style={styles.container} onPress={() => this.props.onPress(item)}>
+            <ListItem style={styles.container} onPress={() => this.navigate(item)}>
                 <Thumbnail style={styles.image} source={{ uri: item.image }} />
                 <Body>
                     <Text style={styles.date} note>
@@ -25,7 +30,7 @@ export default class ListCard extends Component {
                         </Text>
                 </Body>
                 <Button transparent danger style={styles.button}
-                    onPress={() => this.onPress(item.id)}>
+                    onPress={() => this.delete(item.id)}>
                     <Icon name='trash' />
                 </Button>
             </ListItem>

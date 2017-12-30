@@ -75,7 +75,7 @@ class HomeScreen extends Component {
             renderItem={({ item }) =>
               <ListCard item={item}
                 deleteImage={(id) => this.props.deleteImage(id)}
-                onPress={(item) => this.navigateTo(item)} />}
+                navigateToItem={(item) => this.navigateTo(item)} />}
             keyExtractor={(item, index) => index} />
           <Button style={styles.button}
             onPress={() => this.onPress()}>
@@ -116,9 +116,7 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     images: state.images.images,
-    currentValue: state.images.currentValue,
     searchResult: state.images.searchResult,
-    loading: state.images.loading
   }
 }
 
@@ -127,7 +125,6 @@ function mapDispatchToProps(dispatch) {
     AddImage: (image) => dispatch(AddImage(image)),
     Search: (val) => dispatch(Search(val)),
     deleteImage: (id) => dispatch(deleteImage(id)),
-    loadingImage: (val) => dispatch(loadingImage(val))
   }
 }
 
