@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "whatinthepic.app"
-               BlueprintName = "whatinthepic"
-               ReferencedContainer = "container:whatinthepic.xcodeproj">
+               BuildableName = "WhatInThePic.app"
+               BlueprintName = "WhatInThePic"
+               ReferencedContainer = "container:WhatInThePic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -43,9 +43,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "whatinthepicTests.xctest"
-               BlueprintName = "whatinthepicTests"
-               ReferencedContainer = "container:whatinthepic.xcodeproj">
+               BuildableName = "WhatInThePicTests.xctest"
+               BlueprintName = "WhatInThePicTests"
+               ReferencedContainer = "container:WhatInThePic.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -61,9 +61,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "whatinthepicTests.xctest"
-               BlueprintName = "whatinthepicTests"
-               ReferencedContainer = "container:whatinthepic.xcodeproj">
+               BuildableName = "WhatInThePicTests.xctest"
+               BlueprintName = "WhatInThePicTests"
+               ReferencedContainer = "container:WhatInThePic.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -71,9 +71,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "whatinthepic.app"
-            BlueprintName = "whatinthepic"
-            ReferencedContainer = "container:whatinthepic.xcodeproj">
+            BuildableName = "WhatInThePic.app"
+            BlueprintName = "WhatInThePic"
+            ReferencedContainer = "container:WhatInThePic.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "whatinthepic.app"
-            BlueprintName = "whatinthepic"
-            ReferencedContainer = "container:whatinthepic.xcodeproj">
+            BuildableName = "WhatInThePic.app"
+            BlueprintName = "WhatInThePic"
+            ReferencedContainer = "container:WhatInThePic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -113,9 +113,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "whatinthepic.app"
-            BlueprintName = "whatinthepic"
-            ReferencedContainer = "container:whatinthepic.xcodeproj">
+            BuildableName = "WhatInThePic.app"
+            BlueprintName = "WhatInThePic"
+            ReferencedContainer = "container:WhatInThePic.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
