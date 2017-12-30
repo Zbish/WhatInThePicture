@@ -1,21 +1,21 @@
 import React, { Component } from 'react';
 import { StyleSheet, Image, } from 'react-native';
-import moment from 'moment'
 import { Container, Text, Content, Card, CardItem } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconHeader from 'react-native-vector-icons/MaterialCommunityIcons';
 import { BackHandler } from 'react-native';
+import moment from 'moment'
 
 export default class ImageScreen extends Component {
+  constructor(props) {
+    super(props)
+    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
+  }
   static navigationOptions = ({ navigation }) => ({
     headerLeft: <IconHeader name={'arrow-left'} size={25} color="white"
       style={{ padding: 10 }}
       onPress={() => navigation.goBack()} />,
   })
-  constructor() {
-    super()
-    this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
-  }
   componentWillMount() {
     BackHandler.addEventListener('hardwareBackPress', this.handleBackButtonClick);
   }

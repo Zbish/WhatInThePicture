@@ -17,7 +17,7 @@ export default (state, action) => {
     break;
     default:
     return state || {
-        images:[],
-      };
+        images:[]
+      }
   }
 }

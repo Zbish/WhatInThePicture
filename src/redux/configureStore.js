@@ -1,9 +1,8 @@
 // configureStore.js
 import { createStore, combineReducers } from 'redux'
-import {persistReducer, persistStore, persistCombineReducers} from 'redux-persist';
+import {persistStore, persistCombineReducers} from 'redux-persist';
 import images from './reducers/images'
 import RootStackNavigator from '../screens/navigator';
-import { AsyncStorage } from 'react-native';
 import storage from 'redux-persist/lib/storage'
 
 const navReducer = (state, action) => {
@@ -12,8 +11,7 @@ const navReducer = (state, action) => {
 };
 const config = {
   key: 'root',
-  storage: storage,
-  images: ['@MySuperStore:key'],
+  storage,
 };
 const appReducer = persistCombineReducers(config, {
   nav: navReducer,

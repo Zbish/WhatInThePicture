@@ -9,15 +9,18 @@ import ListCard from '../component/ListCard'
 import MyList from '../component/MyList'
 import { getImage, renderIf } from '../utils'
 
-
-
 class HomeScreen extends Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.state = {
       loading: true
     }
   }
+
+  navigateTo(item) {
+    this.props.navigation.navigate("ImageScreen", { item: item });
+  }
+
   componentDidMount() {
     SplashScreen.close({
       animationType: SplashScreen.animationType.scale,
@@ -36,8 +39,8 @@ class HomeScreen extends Component {
     })
   }
 
-  navigateTo(item) {
-    this.props.navigation.navigate("ImageScreen", { item: item });
+  delete(images, id) {
+    this.props.deleteImage(images, id)
   }
 
   render() {
@@ -48,7 +51,7 @@ class HomeScreen extends Component {
           <MyList
             images={images}
             addNewImage={() => this.addImage()}
-            deleteImage={(id) => this.props.deleteImage(images,id)}
+            deleteImage={(id) => this.delete(images, id)}
             navigateTo={(item) => this.navigateTo(item)} />
           ,
           <ActivityIndicator size="large" color="#FF5722" style={styles.indicator} />
@@ -74,7 +77,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     AddImage: (image) => dispatch(AddImage(image)),
-    deleteImage: (images,id) => dispatch(deleteImage(images,id)),
+    deleteImage: (images, id) => dispatch(deleteImage(images, id)),
   }
 }
 
