@@ -2,77 +2,86 @@
 import React, { Component } from 'react';
 import { StyleSheet, FlatList, ActivityIndicator, View } from 'react-native';
 import ListCard from '../component/ListCard'
-import { getImage, saveData } from '../utils'
+import { getImage, incrementalSearch } from '../utils'
 import { connect } from 'react-redux'
 import { AddImage, Search, deleteImage, loadingImage } from '../redux/actions'
 import { Container, Content, Button, Text, Form, Item, Input } from 'native-base';
 import SplashScreen from 'react-native-smart-splash-screen'
 
 class HomeScreen extends Component {
-
-  componentDidMount () {
-       //SplashScreen.close(SplashScreen.animationType.scale, 850, 500)
-       SplashScreen.close({
-          animationType: SplashScreen.animationType.scale,
-          duration: 850,
-          delay: 500,
-       })
+  constructor() {
+    super()
+    this.state = {
+      searchValue: '',
+      loading: true
+    }
+  }
+  componentDidMount() {
+    SplashScreen.close({
+      animationType: SplashScreen.animationType.scale,
+      duration: 850,
+      delay: 500,
+    })
   }
 
   onPress() {
-    this.props.loadingImage(false)
+    this.setState({ loading: false })
     getImage().then((newImage) => {
       if (newImage) {
         this.props.AddImage(newImage)
       }
-      this.props.loadingImage(true)
+      this.setState({ loading: true })
     })
   }
   navigateTo(item) {
     this.props.navigation.navigate("ImageScreen", { item: item });
   }
-  onChange(val) {
-    var lowerVal = val.toLowerCase()
-    this.props.Search(lowerVal)
+
+  onChangeSearchValue(val) {
+    val
+    this.setState({ searchValue: val })
+    this.props.Search(val)
   }
   renderIf(condition, content) {
     if (condition) {
       return content;
     } else {
       return <View style={styles.indicator}>
-                    <ActivityIndicator size="large" color="#FF5722" />
-            </View>;
+        <ActivityIndicator size="large" color="#FF5722" />
+      </View>;
     }
   }
   render() {
     const images = this.props.images
     const search = this.props.searchResult
-    const value = this.props.currentValue
+    const value = this.state.searchValue
     const show = value ? search : images
     return (
-      this.renderIf(this.props.loading, <Container>
-        <Form>
-          <Item regular>
-            <Input
-              onChangeText={(val) => this.onChange(val)}
-              value={value}
-              placeholder='Search'
-              style={styles.textInput}
-            />
-          </Item>
-        </Form>
-        <FlatList
-          data={show}
-          renderItem={({ item }) =>
-            <ListCard item={item}
-              deleteImage={(id) => this.props.deleteImage(id)}
-              onPress={(item) => this.navigateTo(item)} />}
-          keyExtractor={(item, index) => index} />
-        <Button style={styles.button}
-          onPress={() => this.onPress()}>
-          <Text>ADD</Text>
-        </Button>
-      </Container>)
+      this.renderIf(this.state.loading,
+        <Container>
+          <Form>
+            <Item regular>
+              <Input
+                autoCapitalize='none'
+                onChangeText={(val) => this.onChangeSearchValue(val)}
+                value={value}
+                placeholder='Search'
+                style={styles.textInput}
+              />
+            </Item>
+          </Form>
+          <FlatList
+            data={show}
+            renderItem={({ item }) =>
+              <ListCard item={item}
+                deleteImage={(id) => this.props.deleteImage(id)}
+                onPress={(item) => this.navigateTo(item)} />}
+            keyExtractor={(item, index) => index} />
+          <Button style={styles.button}
+            onPress={() => this.onPress()}>
+            <Text>ADD</Text>
+          </Button>
+        </Container>)
     );
   }
 }
