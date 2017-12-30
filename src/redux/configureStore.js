@@ -1,13 +1,8 @@
 // configureStore.js
-
 import { createStore, combineReducers } from 'redux'
+import {persistReducer, persistStore, persistCombineReducers} from 'redux-persist';
 import images from './reducers/images'
 import RootStackNavigator from '../screens/navigator';
-import {
-  persistReducer,
-  persistStore,
-  persistCombineReducers,
-} from 'redux-persist';
 import { AsyncStorage } from 'react-native';
 import storage from 'redux-persist/lib/storage'
 

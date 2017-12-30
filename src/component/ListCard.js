@@ -10,7 +10,7 @@ export default class ListCard extends Component {
     delete(id) {
         this.props.deleteImage(id)
     }
-    navigate(item){
+    navigate(item) {
         this.props.navigateToItem(item)
     }
 

@@ -109,9 +109,17 @@ const uuidv4 = function () {
 }
 
 // delete image from list
-export const deleteImage = function (array, id) {
+export const deletepic = function (array, id) {
   var clone = _.cloneDeep(array);
   var index = _.findIndex(clone, function (o) { return o.id == id; });
   clone.splice(index, 1);
   return clone
+}
+// render If 
+export const renderIf = function(condition, content, indicator) {
+  if (condition) {
+    return content;
+  } else {
+    return indicator;
+  }
 }

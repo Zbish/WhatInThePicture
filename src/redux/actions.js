@@ -1,5 +1,5 @@
 import {ADD_IMAGE,SEARCH,DELETE_IMAGE } from './constant';
-
+import {incrementalSearch,deletepic} from '../utils'
 
 
 export function AddImage(image){
@@ -9,15 +9,17 @@ export function AddImage(image){
       };
     }
 
-export function Search(val){
+export function Search(array,val){
+    var searchElement = incrementalSearch(array,val)
     return {
         type: SEARCH,
-        val
+        searchElement
     }
 }
-export function deleteImage(id){
+export function deleteImage(array,id){
+    var newState = deletepic(array,id)
     return {
         type: DELETE_IMAGE,
-        id
+        newState
     }
 }
