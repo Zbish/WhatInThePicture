@@ -25,7 +25,7 @@ export default class ImageScreen extends Component {
   }
 
   handleBackButtonClick() {
-    this.props.navigation.goBack(null);
+    this.props.navigation.goBack();
     return true;
   }
   render() {

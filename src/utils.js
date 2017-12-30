@@ -115,6 +115,7 @@ export const deletepic = function (array, id) {
   clone.splice(index, 1);
   return clone
 }
+
 // render If 
 export const renderIf = function(condition, content, indicator) {
   if (condition) {
