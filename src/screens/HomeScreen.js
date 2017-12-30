@@ -6,8 +6,18 @@ import { getImage, saveData } from '../utils'
 import { connect } from 'react-redux'
 import { AddImage, Search, deleteImage, loadingImage } from '../redux/actions'
 import { Container, Content, Button, Text, Form, Item, Input } from 'native-base';
+import SplashScreen from 'react-native-smart-splash-screen'
 
 class HomeScreen extends Component {
+
+  componentDidMount () {
+       //SplashScreen.close(SplashScreen.animationType.scale, 850, 500)
+       SplashScreen.close({
+          animationType: SplashScreen.animationType.scale,
+          duration: 850,
+          delay: 500,
+       })
+  }
 
   onPress() {
     this.props.loadingImage(false)

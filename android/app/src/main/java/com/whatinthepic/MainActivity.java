@@ -1,6 +1,9 @@
 package com.whatinthepic;
 
 import com.facebook.react.ReactActivity;
+import com.reactnativecomponent.splashscreen.RCTSplashScreen;
+import android.widget.ImageView; 
+import android.os.Bundle;
 
 public class MainActivity extends ReactActivity {
 
@@ -12,4 +15,10 @@ public class MainActivity extends ReactActivity {
     protected String getMainComponentName() {
         return "whatinthepic";
     }
+    @Override
+protected void onCreate(Bundle savedInstanceState) {
+    // RCTSplashScreen.openSplashScreen(this);   //open splashscreen
+    RCTSplashScreen.openSplashScreen(this, true, ImageView.ScaleType.FIT_XY);   //open splashscreen fullscreen
+    super.onCreate(savedInstanceState);
+}
 }
