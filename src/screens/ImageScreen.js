@@ -6,9 +6,15 @@ import {
 import moment from 'moment'
 import { Container, Text, Content, Card, CardItem } from 'native-base';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+import IconHeader from 'react-native-vector-icons/MaterialCommunityIcons';
 import { BackHandler } from 'react-native';
 
 export default class ImageScreen extends Component {
+  static navigationOptions = ({ navigation }) => ({
+    headerLeft: <IconHeader name={'arrow-left'} size={25} color="white"
+      style={{ padding: 10 }}
+      onPress={() => navigation.goBack()} />,
+  })
   constructor() {
     super()
     this.handleBackButtonClick = this.handleBackButtonClick.bind(this);
@@ -44,7 +50,7 @@ export default class ImageScreen extends Component {
             </CardItem>
             <CardItem header style={styles.textContainer}>
               <Text style={styles.keywords}>keywords</Text>
-              <Text style={{textAlign: 'center'}}>{keywords.join(",   ")}</Text>
+              <Text style={{ textAlign: 'center' }}>{keywords.join(",   ")}</Text>
             </CardItem>
           </Card>
         </Content>
@@ -69,4 +75,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: 'bold',
   },
+  goBack: {
+
+  }
 });
