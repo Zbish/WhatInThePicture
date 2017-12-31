@@ -49,7 +49,6 @@ export default class ImageScreen extends Component {
               {renderIf(vertical,<Image style={styles.image} source={{ uri: image }} />,
                 <Image style={styles.horizontal} source={{ uri: image }} />
               )}
-              
             </CardItem>
             <CardItem header style={styles.textContainer}>
               <Text style={styles.keywords}>keywords</Text>
