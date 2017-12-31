@@ -1,7 +1,7 @@
 import Clarifai from 'clarifai';
 import _ from 'lodash';
 import ImagePicker from 'react-native-image-picker'
-import { Alert } from 'react-native'
+import { Alert,NetInfo } from 'react-native'
 
 // image recognition key
 const app = new Clarifai.App({
@@ -48,9 +48,25 @@ export const getImage = function () {
     })
   })
 }
-
+// check internet conection
+const checkNet = function(){
+  NetInfo.getConnectionInfo().then((connectionInfo) => {
+    if (connectionInfo.type == 'cellular')
+      {
+        Alert.alert(
+          'For Better Performance',
+          'Switch To WiFi',
+          [
+            {text: 'OK'},
+          ],
+          { cancelable: false }
+        )
+      }
+  });
+}
 //  get keywords from  Clarifai api
 const getImageConcepts2 = function (image) {
+  checkNet()
   var cons = []
   try {
     cons = app.models.predict(Clarifai.GENERAL_MODEL, { base64: image }).then(
@@ -78,7 +94,7 @@ const getImageConcepts2 = function (image) {
 // incremental Search
 export const incrementalSearch = function (array, value) {
   var clone = _.cloneDeep(array);
-  var newArray = []
+  var tempArray = []
   var str = value;
   var res = str.split(" ")
   for (var j = 0; j < res.length; j++) {
@@ -89,11 +105,11 @@ export const incrementalSearch = function (array, value) {
       })
 
       if (newList.length > 0) {
-        newArray.push(clone[i])
+        tempArray.push(clone[i])
       }
     }
-    clone = newArray
-    newArray = []
+    clone = tempArray
+    tempArray = []
   }
   return clone
 }
@@ -125,3 +141,5 @@ export const renderIf = function(condition, content, indicator) {
     return indicator;
   }
 }
+
+
