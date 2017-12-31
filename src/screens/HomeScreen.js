@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, ActivityIndicator } from 'react-native';
 import { connect } from 'react-redux'
-import { AddImage, deleteImage } from '../redux/actions'
+import { AddImage, deleteImage, search } from '../redux/actions'
 import { Container } from 'native-base';
 import SplashScreen from 'react-native-smart-splash-screen'
 import ListCard from '../component/ListCard'
@@ -39,19 +39,25 @@ class HomeScreen extends Component {
     })
   }
 
-  delete(images, id) {
-    this.props.deleteImage(images, id)
+  delete(images, id, search) {
+    this.props.deleteImage(images, id, search)
   }
 
+  searchItem(images, val) {
+    this.props.search(images, val)
+  }
   render() {
     const images = this.props.images
+    const search = this.props.searchResult
     return (
       <Container >
         {renderIf(this.state.loading,
           <MyList
             images={images}
+            search={search}
             addNewImage={() => this.addImage()}
-            deleteImage={(id) => this.delete(images, id)}
+            deleteImage={(id) => this.delete(images, id, search)}
+            searhInc={(val) => this.searchItem(images, val)}
             navigateTo={(item) => this.navigateTo(item)} />
           ,
           <ActivityIndicator size="large" color="#FF5722" style={styles.indicator} />
@@ -71,13 +77,15 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     images: state.images.images,
+    searchResult: state.images.searchResult
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
     AddImage: (image) => dispatch(AddImage(image)),
-    deleteImage: (images, id) => dispatch(deleteImage(images, id)),
+    deleteImage: (images, id, search) => dispatch(deleteImage(images, id, search)),
+    search: (images, val) => dispatch(search(images, val)),
   }
 }
 
