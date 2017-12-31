@@ -5,6 +5,8 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconHeader from 'react-native-vector-icons/MaterialCommunityIcons';
 import { BackHandler } from 'react-native';
 import moment from 'moment'
+import {renderIf} from '../utils'
+
 
 export default class ImageScreen extends Component {
   constructor(props) {
@@ -33,6 +35,7 @@ export default class ImageScreen extends Component {
     var time = item.taken
     var keywords = item.keywords
     var image = item.image
+    var vertical = item.vertical
     return (
       <Container >
         <Content>
@@ -43,7 +46,10 @@ export default class ImageScreen extends Component {
               <Text note>{moment(time).format('dddd ,LL')}</Text>
             </CardItem>
             <CardItem style={styles.imageContainer} cardBody>
-              <Image style={styles.image} source={{ uri: image }} />
+              {renderIf(vertical,<Image style={styles.image} source={{ uri: image }} />,
+                <Image style={styles.horizontal} source={{ uri: image }} />
+              )}
+              
             </CardItem>
             <CardItem header style={styles.textContainer}>
               <Text style={styles.keywords}>keywords</Text>
@@ -63,6 +69,10 @@ const styles = StyleSheet.create({
   image: {
     width: 200,
     height: 300
+  },
+  horizontal:{
+    width: 320,
+    height: 240
   },
   textContainer: {
     flexDirection: 'column',

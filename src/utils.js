@@ -36,7 +36,8 @@ export const getImage = function () {
           if(value){
             var keywords = value
             var image = response.uri
-            item = { id: guid, image: image, keywords: keywords, taken: time }
+            var vertical = (response.height > response.width) ? true : false
+            item = { id: guid, image: image, keywords: keywords, taken: time, vertical:vertical }
           }else{
             item
           }
