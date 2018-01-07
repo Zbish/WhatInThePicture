@@ -13,6 +13,7 @@ const navReducer = (state, action) => {
 };
 const config = {
   key: 'root',
+  blacklist: ['nav','loading'],
   storage,
 };
 const appReducer = persistCombineReducers(config, {

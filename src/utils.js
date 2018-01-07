@@ -98,14 +98,14 @@ export const checkNet = function(){
 
 // incremental Search
 export const incrementalSearch = function (array, value) {
-  var clone = _.cloneDeep(array);
-  var tempArray = []
-  var str = value;
-  var res = str.split(" ")
-  for (var j = 0; j < res.length; j++) {
-    for (var i = 0; i < clone.length; i++) {
+  let clone = _.cloneDeep(array);
+  let tempArray = []
+  let str = value;
+  let res = str.split(" ")
+  for (j = 0; j < res.length; j++) {
+    for (i = 0; i < clone.length; i++) {
 
-      var newList = clone[i].keywords.filter((v) => {
+      let newList = clone[i].keywords.filter((v) => {
         return v.indexOf(res[j]) !== -1;
       })
 
@@ -132,8 +132,8 @@ const uuidv4 = function () {
 
 // delete image from list
 export const deletepic = function (array, id) {
-  var clone = _.cloneDeep(array);
-  var index = _.findIndex(clone, function (o) { return o.id == id; });
+  let clone = _.cloneDeep(array);
+  const index = _.findIndex(clone, function (o) { return o.id == id; });
   clone.splice(index, 1);
   return clone
 }

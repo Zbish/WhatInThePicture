@@ -37,7 +37,6 @@ class HomeScreen extends Component {
   render() {
     const images = this.props.images
     const search = this.props.searchResult
-    console.log('props' , this.props)
     return (
       <Container >
         {renderIf(this.props.loading.loading,

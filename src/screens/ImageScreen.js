@@ -31,11 +31,11 @@ export default class ImageScreen extends Component {
     return true;
   }
   render() {
-    var item = this.props.navigation.state.params.item
-    var time = item.taken
-    var keywords = item.keywords
-    var image = item.image
-    var vertical = item.vertical
+    const item = this.props.navigation.state.params.item
+    const time = item.taken
+    const keywords = item.keywords
+    const image = item.image
+    const vertical = item.vertical
     return (
       <Container >
         <Content>
