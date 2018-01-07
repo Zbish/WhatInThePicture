@@ -1,4 +1,4 @@
-// reducers/images.js
+// reducers/data.js
 import {DELETE_IMAGE,SEARCH,NEWIMAGE } from '../constant';
 
 export default (state, action) => {

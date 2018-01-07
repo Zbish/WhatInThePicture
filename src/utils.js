@@ -89,6 +89,8 @@ export const checkNet = function(){
         )
         resolve(1) 
         break;
+        default:
+        resolve(1)
       }  
   })
   })

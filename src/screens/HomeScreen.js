@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    images: state.images.images,
-    searchResult: state.images.searchResult,
+    images: state.data.images,
+    searchResult: state.data.searchResult,
     loading:state.loading
   }
 }

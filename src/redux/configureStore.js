@@ -2,7 +2,7 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux'
 import {persistStore, persistCombineReducers} from 'redux-persist';
 import thunk from 'redux-thunk';
-import images from './reducers/images'
+import data from './reducers/data'
 import loading from './reducers/loading'
 import RootStackNavigator from '../screens/navigator';
 import storage from 'redux-persist/lib/storage'
@@ -17,7 +17,7 @@ const config = {
 };
 const appReducer = persistCombineReducers(config, {
   nav: navReducer,
-  images, 
+  data, 
   loading
 });
 
