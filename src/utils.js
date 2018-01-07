@@ -18,11 +18,9 @@ const options = {
     path: 'images'
   }
 };
-// get image and keywords
-export const getImage = function () {
-  var guid = uuidv4()
-  var time = new Date
-  return new Promise((resolve, reject) => {
+// pick image from camera roll or from camera
+export const addImage = function () {
+  return new Promise((resolve, reject)=>{
     ImagePicker.showImagePicker(options, (response) => {
       if (response.didCancel) {
         resolve()
@@ -31,28 +29,56 @@ export const getImage = function () {
         resolve()
       }
       else {
-        getImageConcepts2(response.data).then((value) => {
-          var item
-          if(value){
-            var keywords = value
-            var image = response.uri
-            var vertical = (response.height > response.width) ? true : false
-            item = { id: guid, image: image, keywords: keywords, taken: time, vertical:vertical }
-          }else{
-            item
-          }
-          resolve(item)
-        })
-      }
-
+        resolve(response)
+            }
     })
   })
 }
+// get keywords from clarifai api
+export const getKeyWords = function (image) {
+  return new Promise((resolve, reject) => {
+    try {
+      app.models.predict(Clarifai.GENERAL_MODEL, { base64: image }).then(
+         (response)=>
+         {
+           const concepts = response.outputs[0].data.concepts
+           let keywords = []
+           for (let i = 0; i < concepts.length; i++) {
+             keywords.push(concepts[i].name)
+           }
+           resolve(keywords)
+         }
+       )
+     } catch (error) {
+       resolve([]) 
+     }
+   
+  })
+}
+// create item to save
+export const createItem = function (keywords,imageUri,vertical){
+  const guid = uuidv4()
+  const time = new Date
+  const item = { id: guid, image: imageUri, keywords: keywords, taken: time, vertical:vertical }
+  return item
+}
 // check internet conection
-const checkNet = function(){
-  NetInfo.getConnectionInfo().then((connectionInfo) => {
-    if (connectionInfo.type == 'cellular')
-      {
+export const checkNet = function(){
+  return new Promise((resolve, reject) => {
+    NetInfo.getConnectionInfo().then((connectionInfo) => {
+      switch(connectionInfo.type){
+        case 'none':
+          Alert.alert(
+            'cancelled',
+            'There is no Internet connection',
+            [
+              {text: 'OK'},
+            ],
+            { cancelable: false }
+          )
+          resolve(-1) 
+        break;
+        case 'cellular':
         Alert.alert(
           'For Better Performance',
           'Switch To WiFi',
@@ -61,35 +87,12 @@ const checkNet = function(){
           ],
           { cancelable: false }
         )
-      }
-  });
-}
-//  get keywords from  Clarifai api
-const getImageConcepts2 = function (image) {
-  checkNet()
-  var cons = []
-  try {
-    cons = app.models.predict(Clarifai.GENERAL_MODEL, { base64: image }).then(
-      (response) => {
-        var concepts = response.outputs[0].data.concepts
-        var keywords = []
-        for (var i = 0; i < concepts.length; i++) {
-          keywords.push(concepts[i].name)
-        }
-        return keywords
-      },
-      (err) => {
-        Alert.alert(
-          'cancelled',
-          'check internet connection and try again',
-        )
-      }
-    );
-  } catch (error) {
-    return
+        resolve(1) 
+        break;
+      }  
+  })
+  })
   }
-  return cons
-}
 
 // incremental Search
 export const incrementalSearch = function (array, value) {

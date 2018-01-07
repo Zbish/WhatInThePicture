@@ -1,26 +1,18 @@
 
 import React, { Component } from 'react';
-import { StyleSheet, ActivityIndicator } from 'react-native';
+import { StyleSheet, ActivityIndicator,Button } from 'react-native';
 import { connect } from 'react-redux'
-import { AddImage, deleteImage, search } from '../redux/actions'
+import {deleteImage, search,newIMage } from '../redux/actions'
 import { Container } from 'native-base';
 import SplashScreen from 'react-native-smart-splash-screen'
 import ListCard from '../component/ListCard'
 import MyList from '../component/MyList'
-import { getImage, renderIf } from '../utils'
+import { getImage, renderIf,addImage,checkNet } from '../utils'
 
 class HomeScreen extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      loading: true
-    }
-  }
-
   navigateTo(item) {
     this.props.navigation.navigate("ImageScreen", { item: item });
   }
-
   componentDidMount() {
     SplashScreen.close({
       animationType: SplashScreen.animationType.scale,
@@ -28,14 +20,10 @@ class HomeScreen extends Component {
       delay: 500,
     })
   }
-
   addImage() {
-    this.setState({ loading: false })
-    getImage().then((newImage) => {
-      if (newImage) {
-        this.props.AddImage(newImage)
-      }
-      this.setState({ loading: true })
+    checkNet().then((net)=>{
+      if(net != -1)
+        this.props.newImage()
     })
   }
 
@@ -49,9 +37,10 @@ class HomeScreen extends Component {
   render() {
     const images = this.props.images
     const search = this.props.searchResult
+    console.log('props' , this.props)
     return (
       <Container >
-        {renderIf(this.state.loading,
+        {renderIf(this.props.loading.loading,
           <MyList
             images={images}
             search={search}
@@ -77,15 +66,16 @@ const styles = StyleSheet.create({
 function mapStateToProps(state) {
   return {
     images: state.images.images,
-    searchResult: state.images.searchResult
+    searchResult: state.images.searchResult,
+    loading:state.loading
   }
 }
 
 function mapDispatchToProps(dispatch) {
   return {
-    AddImage: (image) => dispatch(AddImage(image)),
     deleteImage: (images, id, search) => dispatch(deleteImage(images, id, search)),
     search: (images, val) => dispatch(search(images, val)),
+    newImage:()=>dispatch(newIMage()),
   }
 }
 

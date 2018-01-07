@@ -1,14 +1,8 @@
 // reducers/images.js
-import {ADD_IMAGE,DELETE_IMAGE,SEARCH } from '../constant';
+import {DELETE_IMAGE,SEARCH,NEWIMAGE } from '../constant';
 
 export default (state, action) => {
   switch (action.type) {
-    case ADD_IMAGE:
-    return{
-      ...state,
-      images: [action.image,...state.images],
-    };
-    break;
     case DELETE_IMAGE:
     return{
       ...state,
@@ -20,6 +14,12 @@ export default (state, action) => {
     return{
       ...state,
       searchResult:action.newState
+    };
+    break;
+    case NEWIMAGE:
+    return{
+      ...state,
+      images: [action.item,...state.images],
     };
     break;
     default:

@@ -14,9 +14,9 @@ export default class ListCard extends Component {
     }
 
     render() {
-        var item = this.props.item
-        var time = item.taken
-        var keywords = item.keywords
+        const item = this.props.item
+        const time = item.taken
+        const keywords = item.keywords
         return (
             <ListItem style={styles.container} onPress={() => this.navigate(item)}>
                 <Thumbnail style={styles.image} source={{ uri: item.image }} />
