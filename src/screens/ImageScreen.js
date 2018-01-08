@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import IconHeader from 'react-native-vector-icons/MaterialCommunityIcons';
 import { BackHandler } from 'react-native';
 import moment from 'moment'
-import {renderIf} from '../utils'
+import { renderIf } from '../utils'
 
 
 export default class ImageScreen extends Component {
@@ -46,9 +46,11 @@ export default class ImageScreen extends Component {
               <Text note>{moment(time).format('dddd ,LL')}</Text>
             </CardItem>
             <CardItem style={styles.imageContainer} cardBody>
-              {renderIf(vertical,<Image style={styles.image} source={{ uri: image }} />,
-                <Image style={styles.horizontal} source={{ uri: image }} />
-              )}
+              {
+                renderIf(vertical,
+                  <Image style={styles.vertical} source={{ uri: image }} />,
+                  <Image style={styles.horizontal} source={{ uri: image }} />
+                )}
             </CardItem>
             <CardItem header style={styles.textContainer}>
               <Text style={styles.keywords}>keywords</Text>
@@ -65,11 +67,11 @@ const styles = StyleSheet.create({
   imageContainer: {
     justifyContent: 'center'
   },
-  image: {
+  vertical: {
     width: 200,
     height: 300
   },
-  horizontal:{
+  horizontal: {
     width: 320,
     height: 240
   },

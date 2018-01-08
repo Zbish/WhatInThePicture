@@ -3,7 +3,6 @@ import { StyleSheet } from 'react-native';
 import moment from 'moment';
 import { ListItem, Thumbnail, Text, Body, Button, Icon } from 'native-base';
 
-
 export default class ListCard extends Component {
 
     delete(id) {

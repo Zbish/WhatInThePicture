@@ -15,6 +15,15 @@ export default class MyList extends Component {
     this.props.searhInc(val)
 
   }
+  delete(id) {
+    this.props.deleteImage(id)
+  }
+  navigate(item) {
+    this.props.navigateTo(item)
+  }
+  onPress() {
+    this.props.addNewImage()
+  }
   render() {
     const images = this.props.images
     const search = this.props.search
@@ -37,11 +46,12 @@ export default class MyList extends Component {
           data={show}
           renderItem={({ item }) =>
             <ListCard item={item}
-              deleteImage={(id) => this.props.deleteImage(id)}
-              navigateToItem={(item) => this.props.navigateTo(item)} />}
+              deleteImage={(id) => this.delete(id)}
+              navigateToItem={(item) => this.navigate(item)}
+            />}
           keyExtractor={(item, index) => index} />
         <Button style={styles.button}
-          onPress={() => this.props.addNewImage()}>
+          onPress={() => this.onPress()}>
           <Text>ADD</Text>
         </Button>
       </Container>
